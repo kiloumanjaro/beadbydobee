@@ -15,14 +15,16 @@ interface TabNavigationProps {
 
 export function TabNavigation({ activeTab, onTabChange }: TabNavigationProps) {
   return (
-    <div className="inline-flex bg-[#DFDDDE] rounded-full p-1">
+    <div className="inline-flex bg-[#DFDDDE] rounded-full p-[3px]">
       {tabs.map((tab) => (
         <button
           key={tab.id}
           onClick={() => onTabChange(tab.id)}
           className={cn(
-            "px-6 py-2 text-sm font-medium rounded-full transition-all duration-200",
-            activeTab === tab.id ? "bg-white text-[#545253]" : "text-gray-600"
+            "px-6 py-2 text-xs font-medium rounded-full transition-all duration-200",
+            activeTab === tab.id
+              ? "bg-white shadow-sm text-[#4b494a]"
+              : "text-[#969495]"
           )}
         >
           {tab.label}

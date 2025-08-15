@@ -4,16 +4,16 @@ import Image from "next/image";
 
 export default function AboutContent() {
   return (
-    <div className="flex flex-col gap-5 items-center">
-      <div className="mt-8 px-6 py-1 bg-white rounded-xl shadow-sm">
+    <div className="flex flex-col gap-8 items-center">
+      <div className="px-6 pb-3 bg-white rounded-xl shadow-sm">
         <Image
-          src="/logo.jpeg" // image must be in /public folder
+          src="/logo.jpeg"
           alt="Description of image"
-          width={143}
-          height={95}
+          width={160}
+          height={106}
         />
       </div>
-      <span className="text-[#323232] text-xl w-xs text-center">
+      <span className="w-2xs text-[#323232] text-lg text-center">
         <span className="font-semibold">beadbydobee</span> is a custom keychain
         and bracelet business
       </span>

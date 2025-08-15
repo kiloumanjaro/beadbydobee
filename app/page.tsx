@@ -1,14 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { ExpandableLogo } from "@/components/expandable-logo";
 import { TabNavigation } from "@/components/tab-navigation";
 import AboutContent from "@/components/about-content";
 import BraceletContent from "@/components/bracelet-content";
 import KeychainContent from "@/components/keychain-content";
+import Image from "next/image";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState("keychains");
+  const aboutSectionRef = useRef<HTMLDivElement | null>(null);
   const renderContent = () => {
     switch (activeTab) {
       case "about":
@@ -22,24 +24,56 @@ export default function Home() {
     }
   };
 
-  return (
-    <div
-      className="font-sans grid grid-rows-[100px_1fr] items-center h-screen bg-cover bg-bottom"
-      style={{
-        backgroundImage:
-          activeTab === "about"
-            ? "url('/about10.png')" // background when on About
-            : "url('/sky.jpg')", // default background
-      }}
-    >
-      <header className="flex items-center justify-center">
-        <ExpandableLogo />
-      </header>
+  const handleSeeMore = () => {
+    aboutSectionRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
 
-      <main className="flex flex-col gap-8 items-center justify-center">
-        <TabNavigation activeTab={activeTab} onTabChange={setActiveTab} />
-        <div className="h-80 px-10"> {renderContent()}</div>
-      </main>
+  return (
+    <div className="relative">
+      <div
+        className="font-sans grid grid-rows-[100px_1fr] h-screen bg-cover bg-bottom"
+        style={{
+          backgroundImage:
+            activeTab === "about"
+              ? "url('/about.png')" // background when on About
+              : "url('/sky.jpg')", // default background
+        }}
+      >
+        <header className="flex items-center justify-center">
+          <ExpandableLogo />
+        </header>
+
+        <main className="flex flex-col gap-14 pt-14 items-center">
+          <TabNavigation activeTab={activeTab} onTabChange={setActiveTab} />
+          <div className="h-80 px-10"> {renderContent()}</div>
+          {activeTab == "about" && (
+            <button
+              onClick={handleSeeMore}
+              className="px-6 py-2 bg-white text-sm font-medium text-[#323232] rounded-full shadow-sm"
+            >
+              See More
+            </button>
+          )}
+        </main>
+      </div>
+
+      <div
+        ref={aboutSectionRef}
+        className={`h-screen bg-[#EFEFEF] flex justify-center items-center ${
+          activeTab === "about" ? "block" : "hidden"
+        }`}
+      >
+        <Image
+          src="/grass.webp"
+          alt="Description of image"
+          width={1920}
+          height={1080}
+          className="w-[1200px] h-[650px] rounded-3xl"
+        />
+      </div>
     </div>
   );
 }
