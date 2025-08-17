@@ -1,14 +1,16 @@
-import { ExpandableSocialCard } from "@/components/expandable-card";
+import { ExpandableLogo } from "@/components/expandable-logo";
 import BeadsEditor from "@/components/beads-editor";
 
 export default function customize() {
   return (
-    <div className="pt-5 h-screen bg-[#EFEFEF] flex flex-col gap-28">
-      <div className="flex justify-center">
-        <ExpandableSocialCard />
+    <div className="flex flex-col h-screen pb-28 bg-[#EFEFEF]">
+      <div className="flex h-[100px]">
+        <header className="flex flex-1 items-center justify-center">
+          <ExpandableLogo />
+        </header>
       </div>
 
-      <main className="flex flex-col gap-7 row-start-2 items-center justify-center">
+      <main className="flex flex-1 flex-col gap-7 items-center justify-center">
         <p className="w-72 text-center text-[#323232]">
           Click and choose the beads of your choice to complete your bracelet
         </p>

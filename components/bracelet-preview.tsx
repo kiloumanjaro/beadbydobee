@@ -184,8 +184,8 @@ export default function BraceletPreview({
         key={index}
         className="absolute bg-[#D9D9D9] rounded-lg  transition-colors hover:bg-gray-400"
         style={{
-          width: boxSize,
-          height: boxSize,
+          width: `${boxSize}px`,
+          height: `${boxSize}px`,
           left: `calc(50% + ${x}px - ${boxSize / 2}px)`,
           top: `calc(50% + ${y}px - ${boxSize / 2}px)`,
           transform: `rotate(${angle}deg)`,
@@ -197,21 +197,40 @@ export default function BraceletPreview({
   const containerSize = (radius + boxSize) * 2 + 20;
 
   return (
-    <div
-      ref={containerRef}
-      className={`relative select-none ${
-        isDragging ? "cursor-grabbing" : "cursor-grab"
-      }`}
-      style={{
-        width: containerSize,
-        height: containerSize,
-        transform: `rotate(${rotation}deg)`,
-        transition: isDragging ? "none" : "transform 0.1s ease-out",
-      }}
-      onMouseDown={handleMouseDown}
-      onTouchStart={handleTouchStart}
-    >
-      {boxes}
-    </div>
+    <>
+      <main className="absolute top-1/4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-8 z-2">
+        <div className="flex flex-col items-center gap-2">
+          <span className="text-2xl font-bold text-black">Your bracelet</span>
+          <p className="w-72 text-center text-[#323232]">
+            Click and choose the beads of your choice to complete your bracelet
+          </p>
+        </div>
+
+        <div className="flex gap-4 items-center flex-col sm:flex-row">
+          <a
+            className="rounded-lg flex items-center justify-center bg-[#8AB5D5] hover:bg-[#383838] text-white font-semibold text-sm h-10 px-10"
+            href={"/customize"}
+          >
+            Create
+          </a>
+        </div>
+      </main>
+      <div
+        ref={containerRef}
+        className={`relative select-none z-1 ${
+          isDragging ? "cursor-grabbing" : "cursor-grab"
+        }`}
+        style={{
+          width: containerSize,
+          height: containerSize,
+          transform: `rotate(${rotation}deg)`,
+          transition: isDragging ? "none" : "transform 0.1s ease-out",
+        }}
+        onMouseDown={handleMouseDown}
+        onTouchStart={handleTouchStart}
+      >
+        {boxes}
+      </div>
+    </>
   );
 }
