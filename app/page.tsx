@@ -7,6 +7,7 @@ import AboutContent from "@/components/about-content";
 import BraceletContent from "@/components/bracelet-content";
 import KeychainContent from "@/components/keychain-content";
 import Image from "next/image";
+import ModelViewer from "@/components/ModelViewer";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState("keychains");
@@ -62,17 +63,32 @@ export default function Home() {
 
       <div
         ref={aboutSectionRef}
-        className={`h-screen bg-[#EFEFEF] flex justify-center items-center ${
+        className={`relative h-screen bg-[#EFEFEF] flex justify-center items-center ${
           activeTab === "about" ? "block" : "hidden"
         }`}
       >
+        {/* Background Image */}
         <Image
           src="/grass.webp"
           alt="Description of image"
           width={1920}
           height={1080}
-          className="w-[1200px] h-[650px] rounded-3xl"
+          className="w-[1200px] h-[650px] rounded-3xl object-cover"
         />
+
+        {/* ModelViewer on top */}
+        <div className="absolute inset-0 flex justify-center items-center pointer-events-none">
+          <ModelViewer
+            url="/babi.glb"
+            width={1000}
+            height={600}
+            showScreenshotButton={false}
+            defaultRotationX={0}
+            autoRotate
+            defaultRotationY={0}
+            enableManualZoom={false}
+          />
+        </div>
       </div>
     </div>
   );
