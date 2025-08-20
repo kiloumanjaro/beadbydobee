@@ -414,7 +414,6 @@ const ModelInner: FC<ModelInnerProps> = ({
       need = true;
 
     if (need) invalidate();
-    // outer.current.rotation.x = 0;
   });
 
   if (!content) return null;
@@ -502,7 +501,7 @@ const ModelViewer: FC<ViewerProps> = ({
         height,
         touchAction: "pan-y pinch-zoom",
       }}
-      className="relative"
+      className="relative bg-yellow-300"
     >
       {showScreenshotButton && (
         <button

@@ -7,15 +7,12 @@ export default function BraceletContent() {
       {/* <div className="w-[1000] h-[400] bg-red-500" /> */}
       <ModelViewer
         url="/bracelet3.glb"
-        width={1000}
-        height={400}
         defaultRotationX={0}
         defaultRotationY={0}
         autoRotate
-        defaultZoom={0.5}
-        maxZoomDistance={0.5}
         showScreenshotButton={false}
         enableManualZoom={false}
+        autoFrame
       />
       <div className="flex gap-4 items-center flex-col sm:flex-row">
         <a
