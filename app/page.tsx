@@ -12,18 +12,19 @@ import ModelViewer from "@/components/ModelViewer";
 export default function Home() {
   const [activeTab, setActiveTab] = useState("keychains");
   const aboutSectionRef = useRef<HTMLDivElement | null>(null);
-  const renderContent = () => {
-    switch (activeTab) {
-      case "about":
-        return <AboutContent />;
-      case "bracelets":
-        return <BraceletContent />;
-      case "keychains":
-        return <KeychainContent />;
-      default:
-        return null;
-    }
-  };
+  const renderContent = () => (
+    <div>
+      <div className={activeTab === "about" ? "block" : "hidden"}>
+        <AboutContent />
+      </div>
+      <div className={activeTab === "bracelets" ? "block" : "hidden"}>
+        <BraceletContent />
+      </div>
+      <div className={activeTab === "keychains" ? "block" : "hidden"}>
+        <KeychainContent />
+      </div>
+    </div>
+  );
 
   const handleSeeMore = () => {
     aboutSectionRef.current?.scrollIntoView({
@@ -40,16 +41,16 @@ export default function Home() {
           backgroundImage:
             activeTab === "about"
               ? "url('/about.png')" // background when on About
-              : "url('/sky.jpg')", // default background
+              : "url('/background.png')", // default background
         }}
       >
         <header className="flex items-center justify-center">
           <ExpandableLogo />
         </header>
 
-        <main className="flex flex-col gap-14 pt-14 items-center">
+        <main className="flex flex-col gap-3 pt-14 items-center">
           <TabNavigation activeTab={activeTab} onTabChange={setActiveTab} />
-          <div className="h-80 px-10"> {renderContent()}</div>
+          <div className="bg-red-500 px-10"> {renderContent()}</div>
           {activeTab == "about" && (
             <button
               onClick={handleSeeMore}
