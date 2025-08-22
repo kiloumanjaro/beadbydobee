@@ -7,14 +7,22 @@ import AboutContent from "@/components/about-content";
 import BraceletContent from "@/components/bracelet-content";
 import KeychainContent from "@/components/keychain-content";
 import Image from "next/image";
+import ModelViewer from "@/components/ModelViewer";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState("keychains");
+  const aboutSectionRef = useRef<HTMLDivElement | null>(null);
+  const handleSeeMore = () => {
+    aboutSectionRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
 
   const renderContent = () => {
     switch (activeTab) {
       case "about":
-        return <AboutContent />;
+        return <AboutContent onPress={handleSeeMore} />;
       case "bracelets":
         return <BraceletContent />;
       case "keychains":
@@ -25,17 +33,52 @@ export default function Home() {
   };
 
   return (
-    <div className="relative">
-      <div className="font-sans grid grid-rows-[100px_100px_1fr]  bg-red-500">
-        <header className="flex bg-red-400 items-center justify-center">
+    <div>
+      <div
+        className="font-sans bg-cover bg-bottom h-screen"
+        style={{
+          backgroundImage:
+            activeTab === "about"
+              ? "url('/about.png')" // background when on About
+              : "url('/background.png')", // default background
+        }}
+      >
+        <main className="relative flex-1">
           <ExpandableLogo />
-        </header>
+          <div className="relative">
+            <TabNavigation activeTab={activeTab} onTabChange={setActiveTab} />
+            {renderContent()}
+          </div>
+        </main>
+      </div>
 
-        <div className="flex flex-col bg-blue-400  items-center justify-center">
-          <TabNavigation activeTab={activeTab} onTabChange={setActiveTab} />
+      <div
+        className={`relative h-screen bg-[#EFEFEF] flex justify-center items-center ${
+          activeTab === "about" ? "block" : "hidden"
+        }`}
+        ref={aboutSectionRef}
+      >
+        <Image
+          src="/grass.webp"
+          alt="Description of image"
+          width={1920}
+          height={1080}
+          className="w-[1200px] h-[650px] rounded-3xl object-cover"
+        />
+        {/* ModelViewer on top */}
+        <div className="absolute inset-0 flex justify-center items-center pointer-events-none">
+          <ModelViewer
+            url="/babi.glb"
+            width={700}
+            height={700}
+            defaultRotationX={0}
+            defaultRotationY={0}
+            autoRotate
+            showScreenshotButton={false}
+            enableManualZoom={false}
+            autoFrame
+          />
         </div>
-
-        <main className="items-center">{renderContent()}</main>
       </div>
     </div>
   );

@@ -501,7 +501,7 @@ const ModelViewer: FC<ViewerProps> = ({
         height,
         touchAction: "pan-y pinch-zoom",
       }}
-      className="relative bg-yellow-300"
+      className="relative"
     >
       {showScreenshotButton && (
         <button

@@ -9,7 +9,7 @@ export function ExpandableLogo() {
   return (
     <div
       className={cn(
-        "flex bg-white rounded-full items-center justify-between shadow-sm pl-8 pr-2 py-1.5 transition-all duration-300 ease-in-out cursor-pointer",
+        "absolute left-1/2 -translate-x-1/2 z-20 top-7 flex bg-white rounded-full items-center justify-between shadow-sm pl-8 pr-2 py-1.5 transition-all duration-300 ease-in-out cursor-pointer",
         isHovered ? "w-96" : "w-60"
       )}
       onMouseEnter={() => setIsHovered(true)}

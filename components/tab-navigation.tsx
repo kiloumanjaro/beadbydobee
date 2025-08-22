@@ -15,7 +15,7 @@ interface TabNavigationProps {
 
 export function TabNavigation({ activeTab, onTabChange }: TabNavigationProps) {
   return (
-    <div className="inline-flex bg-[#DFDDDE] rounded-full p-[3px]">
+    <div className="absolute left-1/2 -translate-x-1/2 top-32 z-10 inline-flex bg-[#DFDDDE] rounded-full p-[3px]">
       {tabs.map((tab) => (
         <button
           key={tab.id}
