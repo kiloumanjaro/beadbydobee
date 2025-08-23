@@ -1,5 +1,6 @@
 "use client";
 import ModelViewer from "./ModelViewer";
+import StickerPeel from "./StickerPeel/StickerPeel";
 
 export default function BraceletContent() {
   return (
@@ -24,6 +25,15 @@ export default function BraceletContent() {
           Create
         </a>
       </div>
+      <StickerPeel
+        imageSrc="/circle.png" // 👈 from public/
+        width={200}
+        rotate={30}
+        peelBackHoverPct={20}
+        peelBackActivePct={40}
+        lightingIntensity={0.1}
+        initialPosition={{ x: -100, y: 100 }}
+      />
     </div>
   );
 }
