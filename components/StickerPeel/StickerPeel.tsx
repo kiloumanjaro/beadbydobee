@@ -363,7 +363,7 @@ const StickerPeel: React.FC<StickerPeelProps> = ({
           </div>
         </div>
 
-        <div
+        {/* <div
           className="absolute top-4 left-2 w-full h-full opacity-40"
           style={{ filter: "brightness(0) blur(8px)" }}
         >
@@ -377,7 +377,7 @@ const StickerPeel: React.FC<StickerPeelProps> = ({
               onContextMenu={(e) => e.preventDefault()}
             />
           </div>
-        </div>
+        </div> */}
 
         <div
           className="sticker-flap absolute w-full h-full left-0"

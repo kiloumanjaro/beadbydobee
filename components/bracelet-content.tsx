@@ -26,13 +26,84 @@ export default function BraceletContent() {
         </a>
       </div>
       <StickerPeel
-        imageSrc="/circle.png" // 👈 from public/
-        width={200}
+        imageSrc="/bead.png" // 👈 from public/
+        width={120}
         rotate={30}
         peelBackHoverPct={20}
         peelBackActivePct={40}
+        shadowIntensity={0}
         lightingIntensity={0.1}
-        initialPosition={{ x: -100, y: 100 }}
+        initialPosition={{ x: 550, y: 510 }}
+      />
+      <StickerPeel
+        imageSrc="/bead3.png" // 👈 from public/
+        width={140}
+        rotate={30}
+        peelBackHoverPct={20}
+        peelBackActivePct={40}
+        shadowIntensity={0}
+        lightingIntensity={0.1}
+        initialPosition={{ x: -550, y: 480 }}
+      />
+      <StickerPeel
+        imageSrc="/bead9.png" // 👈 from public/
+        width={180}
+        rotate={-20}
+        peelBackHoverPct={10}
+        peelBackActivePct={15}
+        shadowIntensity={0}
+        lightingIntensity={0.1}
+        initialPosition={{ x: 600, y: 210 }}
+      />
+      <StickerPeel
+        imageSrc="/bead6.png"
+        width={100}
+        rotate={30}
+        peelBackHoverPct={20}
+        peelBackActivePct={40}
+        shadowIntensity={0}
+        lightingIntensity={0.1}
+        initialPosition={{ x: -280, y: 420 }}
+      />
+      <StickerPeel
+        imageSrc="/bead7.png"
+        width={100}
+        rotate={30}
+        peelBackHoverPct={20}
+        peelBackActivePct={40}
+        shadowIntensity={0}
+        lightingIntensity={0.1}
+        initialPosition={{ x: -620, y: 60 }}
+      />
+      <StickerPeel
+        imageSrc="/bead2.png"
+        width={120}
+        rotate={0}
+        peelBackHoverPct={20}
+        peelBackActivePct={40}
+        shadowIntensity={0}
+        lightingIntensity={0.1}
+        initialPosition={{ x: 250, y: 455 }}
+      />
+      <StickerPeel
+        imageSrc="/bead10.png"
+        width={80}
+        rotate={-80}
+        peelBackHoverPct={20}
+        peelBackActivePct={30}
+        shadowIntensity={0}
+        lightingIntensity={0.1}
+        initialPosition={{ x: 460, y: 60 }}
+      />
+      <StickerPeel
+        imageSrc="/bead11.png"
+        width={200}
+        rotate={-80}
+        peelBackHoverPct={20}
+        peelBackActivePct={30}
+        shadowIntensity={0}
+        lightingIntensity={0.1}
+        initialPosition={{ x: -440, y: 210 }}
       />
     </div>
   );
