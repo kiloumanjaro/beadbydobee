@@ -10,17 +10,33 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 
-interface BeadsEditorWithModalProps {
+interface BeadsEditorProps {
   length: number;
+  onSelectionChange?: (selections: { [key: number]: string }) => void;
 }
 
 // Sample bead images - you can replace these with your actual image URLs
 const BEAD_IMAGES = [
-  "/placeholder.svg?height=100&width=100",
-  "/placeholder.svg?height=100&width=100",
-  "/placeholder.svg?height=100&width=100",
-  "/placeholder.svg?height=100&width=100",
-  "/placeholder.svg?height=100&width=100",
+  "/beads/bead1.png",
+  "/beads/bead2.png",
+  "/beads/bead3.png",
+  "/beads/bead4.png",
+  "/beads/bead5.png",
+  "/placeholder-fs8gh.png",
+  "/placeholder-8kspz.png",
+  "/placeholder-ml7bv.png",
+  "/placeholder-lwtyj.png",
+  "/placeholder-29eb6.png",
+  "/placeholder-3x8ky.png",
+  "/placeholder-81j0q.png",
+  "/placeholder-hyp5g.png",
+  "/placeholder-bqzcp.png",
+  "/placeholder-j6xuj.png",
+  "/placeholder-tr51z.png",
+  "/placeholder-4tzde.png",
+  "/placeholder-b78f9.png",
+  "/placeholder-6pnvc.png",
+  "/placeholder-rnqmq.png",
   "/placeholder.svg?height=100&width=100",
   "/placeholder.svg?height=100&width=100",
   "/placeholder.svg?height=100&width=100",
@@ -30,9 +46,10 @@ const BEAD_IMAGES = [
   "/placeholder.svg?height=100&width=100",
 ];
 
-export default function BeadsEditorWithModal({
+export default function BeadsEditor({
   length,
-}: BeadsEditorWithModalProps) {
+  onSelectionChange,
+}: BeadsEditorProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
@@ -42,6 +59,12 @@ export default function BeadsEditorWithModal({
   const [beadSelections, setBeadSelections] = useState<{
     [key: number]: string;
   }>({});
+
+  useEffect(() => {
+    if (onSelectionChange) {
+      onSelectionChange(beadSelections);
+    }
+  }, [beadSelections, onSelectionChange]);
 
   useEffect(() => {
     if (!scrollRef.current || length === 0) return;
@@ -175,7 +198,7 @@ export default function BeadsEditorWithModal({
       </div>
 
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+        <DialogContent className="max-w-2xl max-h-[60vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="flex items-center justify-between">
               Select a Bead for Position{" "}

@@ -1,26 +1,32 @@
 "use client";
 
 import type React from "react";
-
 import { useState, useRef, useCallback, useEffect } from "react";
+import { Button } from "@/components/ui/button";
 
 interface BraceletPreviewProps {
   length: number;
   radius?: number;
   boxSize?: number;
+  beadSelections?: { [key: number]: string };
+  onCustomize: () => void;
+  onConfirm: () => void;
 }
 
 export default function BraceletPreview({
   length,
   radius = 550,
   boxSize = 100,
+  beadSelections = {},
+  onCustomize,
+  onConfirm,
 }: BraceletPreviewProps) {
   const [rotation, setRotation] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0, rotation: 0 });
   const [momentum, setMomentum] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
-  const animationRef = useRef<number>();
+  const animationRef = useRef<number | null>(null);
   const lastAngleRef = useRef(0);
   const lastTimeRef = useRef(0);
 
@@ -179,10 +185,12 @@ export default function BraceletPreview({
     const x = Math.cos(radian) * radius;
     const y = Math.sin(radian) * radius;
 
+    const selectedBead = beadSelections[index];
+
     return (
       <div
         key={index}
-        className="absolute bg-[#D9D9D9] rounded-lg  transition-colors hover:bg-gray-400"
+        className="absolute bg-[#D9D9D9] rounded-lg transition-colors hover:bg-gray-400 overflow-hidden"
         style={{
           width: `${boxSize}px`,
           height: `${boxSize}px`,
@@ -190,7 +198,16 @@ export default function BraceletPreview({
           top: `calc(50% + ${y}px - ${boxSize / 2}px)`,
           transform: `rotate(${angle}deg)`,
         }}
-      />
+      >
+        {selectedBead && (
+          <img
+            src={selectedBead || "/placeholder.svg"}
+            alt={`Bead ${index + 1}`}
+            className="w-full h-full object-cover rounded-lg"
+            style={{ transform: `rotate(-${angle}deg)` }}
+          />
+        )}
+      </div>
     );
   });
 
@@ -202,17 +219,26 @@ export default function BraceletPreview({
         <div className="flex flex-col items-center gap-2">
           <span className="text-2xl font-bold text-black">Your bracelet</span>
           <p className="w-72 text-center text-[#323232]">
-            Click and choose the beads of your choice to complete your bracelet
+            Review your custom bracelet design before placing your order
           </p>
         </div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-lg flex items-center justify-center bg-[#8AB5D5] hover:bg-[#383838] text-white font-semibold text-sm h-10 px-10"
-            href={"/customize"}
-          >
-            Create
-          </a>
+        <div className="flex gap-4 items-center flex-row sm:flex-row">
+          <div className="flex gap-4 items-center flex-col sm:flex-row">
+            <Button
+              variant="outline"
+              onClick={onCustomize}
+              className="rounded-lg h-10 px-8 border-[#8AB5D5] text-[#8AB5D5] hover:bg-[#8AB5D5] hover:text-white bg-transparent"
+            >
+              Back to Customize
+            </Button>
+            <Button
+              onClick={onConfirm}
+              className="rounded-lg bg-[#8AB5D5] hover:bg-[#383838] text-white font-semibold h-10 px-8"
+            >
+              Confirm Order
+            </Button>
+          </div>
         </div>
       </main>
       <div

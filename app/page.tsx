@@ -7,9 +7,12 @@ import AboutContent from "@/components/about-content";
 import BraceletContent from "@/components/bracelet-content";
 import KeychainContent from "@/components/keychain-content";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import ModelViewer from "@/components/ModelViewer";
 
 export default function Home() {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
   const [activeTab, setActiveTab] = useState("keychains");
   const aboutSectionRef = useRef<HTMLDivElement | null>(null);
   const handleSeeMore = () => {
@@ -44,7 +47,7 @@ export default function Home() {
         }}
       >
         <main className="relative flex-1">
-          <ExpandableLogo />
+          <ExpandableLogo isHome={isHome} />
           <div className="relative">
             <TabNavigation activeTab={activeTab} onTabChange={setActiveTab} />
             {renderContent()}
