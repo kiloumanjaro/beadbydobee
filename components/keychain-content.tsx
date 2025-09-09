@@ -3,12 +3,12 @@ import ModelViewer from "./ModelViewer";
 
 export default function KeychainContent() {
   return (
-    <div className="flex flex-col gap-5 items-center">
+    <div className="flex flex-col gap-5 items-center pb-10 pt-32">
       {/* <div className="w-[1000] h-[400] bg-red-500" /> */}
       <ModelViewer
-        width={700}
-        height={700}
-        url="/bracelet4.glb"
+        width={600}
+        height={570}
+        url="/keychain3.glb"
         defaultRotationX={0}
         defaultRotationY={0}
         autoRotate
