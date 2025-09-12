@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 interface BeadsEditorProps {
   length: number;
   onSelectionChange?: (selections: { [key: number]: string }) => void;
+  initialSelections?: { [key: number]: string };
 }
 
 // Sample bead images - you can replace these with your actual image URLs
@@ -49,22 +50,28 @@ const BEAD_IMAGES = [
 export default function BeadsEditor({
   length,
   onSelectionChange,
+  initialSelections = {},
 }: BeadsEditorProps) {
+  const [beadSelections, setBeadSelections] = useState<{
+    [key: number]: string;
+  }>(initialSelections);
+
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedBoxIndex, setSelectedBoxIndex] = useState<number | null>(null);
-  const [beadSelections, setBeadSelections] = useState<{
-    [key: number]: string;
-  }>({});
+
+  useEffect(() => {
+    setBeadSelections(initialSelections);
+  }, [JSON.stringify(initialSelections)]);
 
   useEffect(() => {
     if (onSelectionChange) {
       onSelectionChange(beadSelections);
     }
-  }, [beadSelections, onSelectionChange]);
+  }, [beadSelections]);
 
   useEffect(() => {
     if (!scrollRef.current || length === 0) return;

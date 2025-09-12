@@ -3,9 +3,9 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { ExpandableLogo } from "@/components/expandable-logo";
-import { Button } from "@/components/ui/button";
 import BraceletPreview from "@/components/bracelet-preview";
 import { usePathname } from "next/navigation";
+import { encodeDesign } from "@/lib/converter";
 
 interface BraceletDesign {
   beadSelections: { [key: number]: string };
@@ -43,9 +43,10 @@ export default function Confirm() {
   };
 
   const handleConfirmOrder = () => {
-    // Here you would typically send the order to your backend
-    alert("Order confirmed! Your custom bracelet will be created.");
-    // Clear the saved design
+    if (braceletDesign) {
+      const encoded = encodeDesign(braceletDesign);
+      alert("Encoded design string:\n" + encoded);
+    }
     localStorage.removeItem("braceletDesign");
     router.push("/customize");
   };
