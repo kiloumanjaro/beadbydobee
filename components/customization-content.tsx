@@ -1,7 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Settings, Code, Upload, Ruler } from "lucide-react";
+import {
+  ChevronDown,
+  RotateCcw,
+  Settings,
+  Code,
+  Upload,
+  Ruler,
+} from "lucide-react";
 import { Button } from "./ui/button";
 
 interface CustomizationOptionsProps {
@@ -55,13 +62,13 @@ export default function CustomizationOptions({
   const getActiveIcon = () => {
     switch (activeOption) {
       case "size":
-        return <Ruler className="w-4 h-4 text-gray-600" />;
+        return <Ruler className="w-4.5 h-4.5 text-gray-600" />;
       case "generate":
-        return <Code className="w-4 h-4 text-gray-600" />;
+        return <Code className="w-4.5 h-4.5 text-gray-600" />;
       case "import":
-        return <Upload className="w-4 h-4 text-gray-600" />;
+        return <Upload className="w-4.5 h-4.5 text-gray-600" />;
       default:
-        return <Settings className="w-4 h-4 text-gray-600" />;
+        return <Settings className="w-4.5 h-4.5 text-gray-600" />;
     }
   };
 
@@ -69,18 +76,18 @@ export default function CustomizationOptions({
     switch (activeOption) {
       case "size":
         return (
-          <div className="flex gap-2 ">
+          <div className="flex gap-1">
             {SIZE_OPTIONS.map((option) => (
               <button
                 key={option.id}
                 onClick={() => onSizeChange(option.id)}
-                className={`px-3 py-2 rounded-md text-xs font-medium transition-all duration-200 ${
+                className={`w-11 py-2 rounded-sm text-sm font-medium transition-all duration-200 ${
                   selectedSize === option.id
-                    ? "bg-[#8AB5D5] text-white shadow-sm"
-                    : "text-[#323232] hover:bg-gray-50"
+                    ? "bg-gradient-to-b from-[#8AB5D5] to-[#6EA6BF] text-white shadow-sm text-shadow-sm"
+                    : "text-[#727272] hover:bg-gray-50"
                 }`}
               >
-                <div className="flex flex-col items-center gap-1">
+                <div className="flex flex-col items-center gap-1 ">
                   <span>{option.label}</span>
                 </div>
               </button>
@@ -90,7 +97,7 @@ export default function CustomizationOptions({
 
       case "generate":
         return (
-          <div className="flex-row w-full bg-white">
+          <div className="flex flex-row items-center w-full bg-white">
             <div className="flex flex-row items-center gap-3">
               {/* Input field */}
               <div className="relative flex-1 overflow-hidden">
@@ -98,43 +105,43 @@ export default function CustomizationOptions({
                   type="text"
                   value={codeContent}
                   readOnly
-                  className="w-full px-3 py-2 text-sm border border-gray-300 bg-gray-100 rounded-lg whitespace-nowrap font-mono overflow-hidden disabled:cursor-not-allowed focus:outline-none focus:ring-0"
+                  className="w-full px-3 h-9 text-sm border border-gray-300 bg-gray-100 rounded-sm whitespace-nowrap font-mono overflow-hidden disabled:cursor-not-allowed focus:outline-none focus:ring-0"
                 />
               </div>
-
-              {/* Reset button */}
-              <Button
-                onClick={() => {
-                  setCodeContent("");
-                  setCopiedCode(false);
-                }}
-                variant="destructive" // red button from shadcn/ui
-                size="sm"
-                disabled={!codeContent} // disable if there's no text
-              >
-                Reset
-              </Button>
-
-              {/* Copy or Generate */}
-              {codeVisbility && codeContent ? (
+              <div className="flex flex-row items-center gap-1.5">
+                {/* Copy or Generate */}
+                {codeVisbility && codeContent ? (
+                  <Button
+                    onClick={onCopyCode}
+                    variant={!copiedCode ? "default" : "secondary"}
+                    size="full"
+                    disabled={copiedCode}
+                  >
+                    {copiedCode ? "Copied" : "Copy"}
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={onGenerateCode}
+                    disabled={Object.keys(braceletDesign).length === 0}
+                    variant="default"
+                    size="full"
+                  >
+                    Generate
+                  </Button>
+                )}
+                {/* Reset button */}
                 <Button
-                  onClick={onCopyCode}
-                  variant="secondary"
-                  size="sm"
-                  disabled={copiedCode}
+                  onClick={() => {
+                    setCodeContent("");
+                    setCopiedCode(false);
+                  }}
+                  variant={codeContent ? "destructive" : "secondary"}
+                  size="icon"
+                  disabled={!codeContent}
                 >
-                  {copiedCode ? "Copied" : "Copy"}
+                  <RotateCcw className="w-5 h-5" />
                 </Button>
-              ) : (
-                <Button
-                  onClick={onGenerateCode}
-                  disabled={Object.keys(braceletDesign).length === 0}
-                  variant="default"
-                  size="default"
-                >
-                  Generate Code
-                </Button>
-              )}
+              </div>
             </div>
           </div>
         );
@@ -149,11 +156,11 @@ export default function CustomizationOptions({
               onChange={(e) => {
                 setImportCode(e.target.value);
               }}
-              className="flex-1 px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8AB5D5]"
+              className="flex-1 px-3 py-2 text-sm border border-gray-300 rounded-sm focus:outline-none focus:border-[#8AB5D5]"
             />
             <button
               onClick={onImportCode}
-              className="px-4 py-2 bg-[#8AB5D5] hover:bg-[#7AA4C4] text-white text-sm font-medium rounded-lg transition-colors"
+              className="px-4 py-2 bg-gradient-to-b from-[#8AB5D5] to-[#6EA6BF] hover:bg-[#6d97b6] text-white text-shadow-sm text-sm font-medium rounded-md transition-colors"
             >
               Import
             </button>
@@ -166,15 +173,20 @@ export default function CustomizationOptions({
   };
 
   return (
-    <div className="relative flex flex-row bg-white w-md gap-3 h-14 items-center px-3 rounded-xl">
+    <div className="relative flex flex-row bg-gradient-to-b from-[#ffffff] to-[#f3f3f3] w-base gap-4 h-13 items-center px-3 rounded-md shadow-sm">
       {/* Main dropdown button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg hover:border-[#8AB5D5] transition-colors"
+        className="flex gap-3 pl-3 py-2 items-center"
       >
         {getActiveIcon()}
+        <ChevronDown
+          className={`w-4 h-4 text-gray-600 transition-transform ${
+            isOpen ? "rotate-180" : ""
+          }`}
+        />
       </button>
-      <div>{renderOptionContent()}</div>
+      <div className="flex-1">{renderOptionContent()}</div>
       {/* Dropdown menu */}
       {isOpen && (
         <div className="absolute top-full left-0 mt-2 w-80 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
