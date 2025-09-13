@@ -2,22 +2,19 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { ExpandableLogo } from "@/components/expandable-logo";
+import { Button } from "@/components/ui/button";
 import BeadsEditor from "@/components/beads-editor";
 import CustomizationOptions, {
   SIZE_OPTIONS,
-} from "@/components/customization-content";
-
-import { usePathname } from "next/navigation";
+} from "@/components/customization-options";
 import { encodeDesign, decodeDesign } from "@/lib/converter";
+import WarningPopup from "@/components/warning-popup";
 
 export default function Customize() {
-  const pathname = usePathname();
-  const isHome = pathname === "/";
   const router = useRouter();
 
   const [selectedSize, setSelectedSize] = useState<
-    "small" | "medium" | "large" | "xl"
+    "small" | "medium" | "large" | "xl" | "2x"
   >("medium");
 
   const slots =
@@ -32,6 +29,7 @@ export default function Customize() {
   const [showGeneratedCode, setShowGeneratedCode] = useState<boolean>(false);
   const [importError, setImportError] = useState<string>("");
   const [copied, setCopied] = useState(false);
+  const [showWarning, setShowWarning] = useState(false);
 
   useEffect(() => {
     const savedDesign = localStorage.getItem("braceletDesign");
@@ -52,7 +50,15 @@ export default function Customize() {
     }
   }, []);
 
-  const handleSizeChange = (size: "small" | "medium" | "large" | "xl") => {
+  useEffect(() => {
+    if (importError) {
+      setShowWarning(true);
+    }
+  }, [importError]);
+
+  const handleSizeChange = (
+    size: "small" | "medium" | "large" | "xl" | "2x"
+  ) => {
     const newSlots =
       SIZE_OPTIONS.find((option) => option.id === size)?.beads || 5;
 
@@ -94,27 +100,30 @@ export default function Customize() {
       return;
     }
 
-    const decoded = decodeDesign(importCode.trim());
-    if (!decoded) {
-      setImportError("Invalid design code. Please check and try again.");
+    try {
+      const decoded = decodeDesign(importCode.trim());
+
+      // Update the design
+      setBeadSelections(decoded.beadSelections);
+
+      // Update size based on length
+      const sizeOption = SIZE_OPTIONS.find(
+        (option) => option.beads === decoded.length
+      );
+      if (sizeOption) {
+        setSelectedSize(sizeOption.id);
+      }
+
+      // Clear states
+      setImportCode("");
+      setImportError("");
+      setShowGeneratedCode(false);
+    } catch (error) {
+      setImportError(
+        "The design code you entered is invalid. Please check the code and try again."
+      );
       return;
     }
-
-    // Update the design
-    setBeadSelections(decoded.beadSelections);
-
-    // Update size based on length
-    const sizeOption = SIZE_OPTIONS.find(
-      (option) => option.beads === decoded.length
-    );
-    if (sizeOption) {
-      setSelectedSize(sizeOption.id);
-    }
-
-    // Clear states
-    setImportCode("");
-    setImportError("");
-    setShowGeneratedCode(false);
   };
 
   const handleCopyCode = async () => {
@@ -129,18 +138,6 @@ export default function Customize() {
   const isAllSlotsFilled = () => {
     const totalSlots = slots;
     return Object.keys(beadSelections).length === totalSlots;
-  };
-
-  const getEmptySlots = () => {
-    const totalSlots = slots;
-    const filledSlots = Object.keys(beadSelections).map(Number);
-    const emptySlots = [];
-    for (let i = 0; i < totalSlots; i++) {
-      if (!filledSlots.includes(i)) {
-        emptySlots.push(i + 1); // Convert to 1-based indexing for display
-      }
-    }
-    return emptySlots;
   };
 
   const handleCreate = () => {
@@ -166,52 +163,9 @@ export default function Customize() {
     <div className="flex flex-col h-screen pb-28 bg-[#EFEFEF]">
       <div className="flex h-[100px]">
         <header className="flex flex-1 items-center justify-center">
-          <ExpandableLogo isHome={isHome} />
-        </header>
-      </div>
-
-      <main className="flex flex-1 flex-col gap-7 items-center justify-center">
-        <p className="w-72 text-center text-[#323232]">
-          Click and choose the beads of your choice to complete your bracelet
-        </p>
-
-        <BeadsEditor
-          length={slots}
-          onSelectionChange={handleBeadSelectionChange}
-          initialSelections={beadSelections}
-        />
-
-        <div className="flex flex-col items-center gap-2">
-          <div className="text-sm text-[#323232]">
-            {Object.keys(beadSelections).length} of {slots} beads selected
-          </div>
-          {!isAllSlotsFilled() && (
-            <div className="text-xs text-red-600 text-center max-w-xs">
-              Please fill all bead positions before creating your bracelet
-              {getEmptySlots().length <= 5 && (
-                <div className="mt-1">
-                  Missing positions: {getEmptySlots().join(", ")}
-                </div>
-              )}
-            </div>
-          )}
-        </div>
-
-        <div className="flex gap-4 items-center flex-col">
-          <button
-            className={`rounded-lg flex items-center justify-center font-semibold text-sm h-10 px-10 transition-colors duration-50 ${
-              isAllSlotsFilled()
-                ? "bg-[#8AB5D5] hover:bg-[#383838] text-white cursor-pointer"
-                : "bg-gray-300 text-gray-500 cursor-not-allowed"
-            }`}
-            onClick={handleCreate}
-            disabled={!isAllSlotsFilled()}
-          >
-            Create
-          </button>
           <CustomizationOptions
             selectedSize={selectedSize}
-            codeVisbility={showGeneratedCode}
+            codeVisibility={showGeneratedCode}
             codeContent={generatedCode}
             setCodeContent={setGeneratedCode}
             braceletDesign={beadSelections}
@@ -225,8 +179,54 @@ export default function Customize() {
             copiedCode={copied}
             setCopiedCode={setCopied}
           />
+        </header>
+      </div>
+
+      <main className="flex flex-1 flex-col gap-7 items-center justify-center bg-red-500">
+        <p className="w-72 text-center text-[#323232]">
+          Click and choose the beads of your choice to complete your bracelet
+        </p>
+
+        <BeadsEditor
+          length={slots}
+          onSelectionChange={handleBeadSelectionChange}
+          initialSelections={beadSelections}
+        />
+
+        <div className="flex flex-col items-center gap-2 h-14">
+          <div className="text-sm text-[#323232]">
+            {Object.keys(beadSelections).length} of {slots} beads selected
+          </div>
+          {!isAllSlotsFilled() && (
+            <div className="text-xs text-red-600 text-center max-w-xs">
+              Please fill all bead positions before creating your bracelet
+            </div>
+          )}
+        </div>
+
+        <div className="flex gap-4 items-center flex-col">
+          <Button
+            onClick={handleCreate}
+            disabled={!isAllSlotsFilled()}
+            variant={isAllSlotsFilled() ? "default" : "secondary"}
+            size="lg"
+          >
+            Create
+          </Button>
         </div>
       </main>
+
+      <WarningPopup
+        isVisible={showWarning}
+        message={
+          importError ||
+          "The design code you entered is invalid. Please check the code and try again."
+        }
+        onClose={() => {
+          setShowWarning(false);
+          setImportError("");
+        }}
+      />
     </div>
   );
 }

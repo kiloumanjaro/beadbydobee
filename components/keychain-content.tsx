@@ -3,7 +3,7 @@ import ModelViewer from "./ModelViewer";
 
 export default function KeychainContent() {
   return (
-    <div className="flex flex-col gap-5 items-center pb-10 pt-32">
+    <div className="flex flex-col gap-5 items-center pt-32">
       {/* <div className="w-[1000] h-[400] bg-red-500" /> */}
       <ModelViewer
         width={600}

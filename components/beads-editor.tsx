@@ -170,7 +170,7 @@ export default function BeadsEditor({
     <>
       <div
         ref={scrollRef}
-        className="w-full overflow-x-auto py-8 scrollbar-hide cursor-grab active:cursor-grabbing"
+        className="w-full overflow-x-auto  cursor-grab active:cursor-grabbing"
         style={{
           scrollbarWidth: "none",
           msOverflowStyle: "none",

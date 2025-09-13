@@ -121,6 +121,17 @@
   }
 }
 
+/* Hide scrollbar for Chrome, Safari, Edge */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for Firefox */
 html {
-  overflow-y: scroll; /* Always show scrollbar */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Hide scrollbar for IE/Edge Legacy */
+html {
+  -ms-overflow-style: none; /* IE and old Edge */
 }
