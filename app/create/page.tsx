@@ -18,7 +18,8 @@ export default function Customize() {
 
   const [selectedSize, setSelectedSize] = useState<
     "small" | "medium" | "large" | "xl"
-  >("small");
+  >("medium");
+
   const slots =
     SIZE_OPTIONS.find((option) => option.id === selectedSize)?.beads || 5;
 
@@ -30,6 +31,7 @@ export default function Customize() {
   const [importCode, setImportCode] = useState<string>("");
   const [showGeneratedCode, setShowGeneratedCode] = useState<boolean>(false);
   const [importError, setImportError] = useState<string>("");
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     const savedDesign = localStorage.getItem("braceletDesign");
@@ -118,6 +120,7 @@ export default function Customize() {
   const handleCopyCode = async () => {
     try {
       await navigator.clipboard.writeText(generatedCode);
+      setCopied(true);
     } catch (error) {
       console.error("Failed to copy code:", error);
     }
@@ -210,6 +213,7 @@ export default function Customize() {
             selectedSize={selectedSize}
             codeVisbility={showGeneratedCode}
             codeContent={generatedCode}
+            setCodeContent={setGeneratedCode}
             braceletDesign={beadSelections}
             onSizeChange={handleSizeChange}
             onGenerateCode={handleGenerateCode}
@@ -218,6 +222,8 @@ export default function Customize() {
             importCode={importCode}
             importError={importError}
             setImportCode={setImportCode}
+            copiedCode={copied}
+            setCopiedCode={setCopied}
           />
         </div>
       </main>

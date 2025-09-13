@@ -14,7 +14,8 @@ export default function Customize() {
 
   const [selectedSize, setSelectedSize] = useState<
     "small" | "medium" | "large" | "xl"
-  >("small");
+  >("medium");
+
   const slots =
     SIZE_OPTIONS.find((option) => option.id === selectedSize)?.beads || 5;
 
