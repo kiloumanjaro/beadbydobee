@@ -46,8 +46,11 @@ export default function Home() {
               : "url('/background.png')", // default background
         }}
       >
-        <main className="relative flex-1">
+        <header className="absolute w-full h-[100px] flex items-center justify-center">
           <ExpandableLogo isHome={isHome} />
+        </header>
+
+        <main className="relative flex-1">
           <div className="relative">
             <TabNavigation activeTab={activeTab} onTabChange={setActiveTab} />
             {renderContent()}

@@ -214,21 +214,30 @@ export default function CustomizationOptions({
         <div className="absolute top-11 left-3 w-18 bg-[#f3f3f3] border border-t-0 border-b-gray-200 rounded-b-sm ">
           <div className="p-2">
             <button
-              onClick={() => setActiveOption("size")}
+              onClick={() => {
+                setActiveOption("size");
+                setIsOpen(false);
+              }}
               className="w-full flex items-center justify-center gap-3 p-3 text-left hover:bg-white rounded-sm transition-colors"
             >
               <Ruler className="w-4.5 h-4.5 text-gray-600" />
             </button>
 
             <button
-              onClick={() => setActiveOption("generate")}
+              onClick={() => {
+                setActiveOption("generate");
+                setIsOpen(false);
+              }}
               className="w-full flex items-center justify-center gap-3 p-3 text-left hover:bg-white rounded-sm transition-colors"
             >
               <Code className="w-4.5 h-4.5 text-gray-600" />
             </button>
 
             <button
-              onClick={() => setActiveOption("import")}
+              onClick={() => {
+                setActiveOption("import");
+                setIsOpen(false);
+              }}
               className="w-full flex items-center justify-center gap-3 p-3 text-left hover:bg-white rounded-sm transition-colors"
             >
               <Upload className="w-4.5 h-4.5 text-gray-600" />

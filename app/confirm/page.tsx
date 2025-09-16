@@ -67,12 +67,10 @@ export default function Confirm() {
   }
 
   return (
-    <div className="flex flex-col h-screen relative overflow-hidden pb-28 bg-[#EFEFEF]">
-      <div className="flex h-[100px]">
-        <header className="flex flex-1 items-center justify-center">
-          <ExpandableLogo isHome={isHome} />
-        </header>
-      </div>
+    <div className="flex flex-col h-screen bg-[#EFEFEF] overflow-hidden ">
+      <header className="absolute w-full h-[100px] flex items-center justify-center">
+        <ExpandableLogo isHome={isHome} />
+      </header>
 
       <main className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 overflow-hidden">
         <BraceletPreview
