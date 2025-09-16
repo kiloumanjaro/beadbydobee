@@ -17,16 +17,8 @@ export default function BraceletContent() {
         enableManualZoom={false}
         autoFrame
       />
-      <div className="flex absolute bottom-24 gap-4 items-center flex-col sm:flex-row">
-        <a
-          className="rounded-full flex items-center justify-center bg-white hover:bg-[#DFDDDE] text-[#545253] font-semibold text-sm h-10 px-10"
-          href={"/customize"}
-        >
-          Create
-        </a>
-      </div>
       <StickerPeel
-        imageSrc="/bead.png" // 👈 from public/
+        imageSrc="/bead.png"
         width={120}
         rotate={30}
         peelBackHoverPct={20}
@@ -36,7 +28,7 @@ export default function BraceletContent() {
         initialPosition={{ x: 550, y: 510 }}
       />
       <StickerPeel
-        imageSrc="/bead3.png" // 👈 from public/
+        imageSrc="/bead3.png"
         width={140}
         rotate={30}
         peelBackHoverPct={20}
@@ -46,7 +38,7 @@ export default function BraceletContent() {
         initialPosition={{ x: -550, y: 480 }}
       />
       <StickerPeel
-        imageSrc="/bead9.png" // 👈 from public/
+        imageSrc="/bead9.png"
         width={180}
         rotate={-20}
         peelBackHoverPct={10}

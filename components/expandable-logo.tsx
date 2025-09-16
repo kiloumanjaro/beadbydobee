@@ -6,10 +6,9 @@ import { cn } from "@/lib/utils";
 
 interface ExpandableLogoProps {
   isHome: boolean;
-  activeTab?: string;
 }
 
-export function ExpandableLogo({ isHome, activeTab }: ExpandableLogoProps) {
+export function ExpandableLogo({ isHome }: ExpandableLogoProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const [activeItem, setActiveItem] = useState<string | null>("Contacts"); // Set "Contacts" as the initial active item
@@ -74,10 +73,9 @@ export function ExpandableLogo({ isHome, activeTab }: ExpandableLogoProps) {
                 (activeItem === item.label && !hoveredItem) ||
                   hoveredItem === item.label
                   ? "border-gray-300 bg-gray-100 text-[#727272]"
-                  : cn(
-                      "border-transparent bg-transparent",
-                      isHome ? "text-white" : "text-[#727272]"
-                    )
+                  : isHome
+                  ? "border-transparent bg-transparent text-white"
+                  : "border-transparent bg-transparent text-[#727272]"
               )}
             >
               {item.label}

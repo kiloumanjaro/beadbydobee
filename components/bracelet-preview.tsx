@@ -217,7 +217,9 @@ export default function BraceletPreview({
     <>
       <main className="absolute top-1/4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-8 z-2">
         <div className="flex flex-col items-center gap-2">
-          <span className="text-2xl font-bold text-black">Your bracelet</span>
+          <span className="text-2xl font-bold text-[#323232]">
+            Curated Piece
+          </span>
           <p className="w-72 text-center text-[#323232]">
             Review your custom bracelet design before placing your order
           </p>
@@ -234,7 +236,9 @@ export default function BraceletPreview({
             </Button>
             <Button
               onClick={onConfirm}
-              className="rounded-lg bg-[#8AB5D5] hover:bg-[#383838] text-white font-semibold h-10 px-8"
+              variant="default"
+              size="lg"
+              className="w-40"
             >
               Confirm Order
             </Button>

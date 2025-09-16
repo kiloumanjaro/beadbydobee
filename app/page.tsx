@@ -7,25 +7,42 @@ import AboutContent from "@/components/about-content";
 import BraceletContent from "@/components/bracelet-content";
 import KeychainContent from "@/components/keychain-content";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
 import ModelViewer from "@/components/ModelViewer";
 
 export default function Home() {
   const pathname = usePathname();
+  const router = useRouter(); // ✅ router hook
   const isHome = pathname === "/";
   const [activeTab, setActiveTab] = useState("keychains");
   const aboutSectionRef = useRef<HTMLDivElement | null>(null);
-  const handleSeeMore = () => {
-    aboutSectionRef.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
+
+  const handleCreateClick = () => {
+    if (activeTab === "keychains") {
+      router.push("/design");
+    } else if (activeTab === "bracelets") {
+      router.push("/customize");
+    } else if (activeTab === "about") {
+      router.push("/contacts");
+    }
+  };
+
+  const getButtonText = () => {
+    if (activeTab === "keychains") return "Choose";
+    if (activeTab === "bracelets") return "Create";
+    if (activeTab === "about") return "Contact";
+    return "Action";
+  };
+
+  const getButtonVariant = () => {
+    return activeTab === "about" ? "default" : "ghost";
   };
 
   const renderContent = () => {
     switch (activeTab) {
       case "about":
-        return <AboutContent onPress={handleSeeMore} />;
+        return <AboutContent />;
       case "bracelets":
         return <BraceletContent />;
       case "keychains":
@@ -36,7 +53,7 @@ export default function Home() {
   };
 
   return (
-    <div>
+    <>
       <div
         className="font-sans bg-cover bg-bottom h-screen"
         style={{
@@ -56,6 +73,15 @@ export default function Home() {
             {renderContent()}
           </div>
         </main>
+        <div className="absolute bottom-25 left-1/2 -translate-x-1/2">
+          <Button
+            onClick={handleCreateClick}
+            variant={getButtonVariant()}
+            size="lg"
+          >
+            {getButtonText()}
+          </Button>
+        </div>
       </div>
 
       <div
@@ -86,6 +112,6 @@ export default function Home() {
           />
         </div>
       </div>
-    </div>
+    </>
   );
 }

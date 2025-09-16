@@ -10,7 +10,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-gradient-to-b from-[#8AB5D5] to-[#6EA6BF] border border-transparent text-white shadow-sm text-shadow-sm hover:bg-[#6d97b6]",
+          "bg-gradient-to-b from-[#8AB5D5] to-[#6EA6BF] hover:from-[#7aa8c8] hover:to-[#5f91aa] border border-transparent text-white shadow-sm  text-shadow-sm",
         destructive:
           "bg-gradient-to-b from-[#e0505a] to-[#cc3e4c] border border-[#b4351f]/20 text-white shadow-xs hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
         outline:
@@ -18,14 +18,14 @@ const buttonVariants = cva(
         secondary:
           "bg-[#efefef] border border-[#b9b9b9] text-secondary-foreground shadow-xs hover:bg-secondary/80",
         ghost:
-          "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
+          "bg-gradient-to-b from-[#ffffff] border border-transparent to-[#f3f3f3] shadow-sm text-[#727272]",
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
         default: "h-9 px-5 py-2 has-[>svg]:px-3",
         full: "pb-2 pt-1.5 w-24 has-[>svg]:px-3",
         sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
-        lg: "pb-2.5 pt-2 w-30 rounded-3xl px-6 has-[>svg]:px-4",
+        lg: "pb-2.5 pt-2 w-30 rounded-3xl has-[>svg]:px-4",
         icon: "size-9 items-center px-5",
       },
     },

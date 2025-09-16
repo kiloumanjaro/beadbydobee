@@ -67,21 +67,23 @@ export default function Confirm() {
   }
 
   return (
-    <div className="flex flex-col h-screen bg-[#EFEFEF] overflow-hidden ">
+    <div className="flex flex-col h-screen bg-[#EFEFEF] overflow-hidden">
       <header className="absolute w-full h-[100px] flex items-center justify-center">
         <ExpandableLogo isHome={isHome} />
       </header>
 
-      <main className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 overflow-hidden">
-        <BraceletPreview
-          length={braceletDesign.length}
-          radius={500}
-          boxSize={100}
-          beadSelections={braceletDesign.beadSelections}
-          onCustomize={handleBackToCustomize}
-          onConfirm={handleConfirmOrder}
-        />
-      </main>
+      <div className="flex-1 relative overflow-hidden">
+        <main className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 overflow-hidden">
+          <BraceletPreview
+            length={braceletDesign.length}
+            radius={500}
+            boxSize={100}
+            beadSelections={braceletDesign.beadSelections}
+            onCustomize={handleBackToCustomize}
+            onConfirm={handleConfirmOrder}
+          />
+        </main>
+      </div>
     </div>
   );
 }
