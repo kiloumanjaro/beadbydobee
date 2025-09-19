@@ -7,7 +7,7 @@ export default function KeychainContent() {
       <ModelViewer
         width={600}
         height={520}
-        url="/keychain3.glb"
+        url="/models/keychain.glb"
         defaultRotationX={0}
         defaultRotationY={0}
         autoRotate

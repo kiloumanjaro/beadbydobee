@@ -56,8 +56,8 @@ export default function Home() {
       style={{
         backgroundImage:
           activeTab === "about"
-            ? "url('/about.png')" // background when on about
-            : "url('/background.png')", // default background
+            ? "url('/about.png')"
+            : "url('/background.png')",
       }}
     >
       <header className="absolute w-full h-[100px] flex items-center justify-center">

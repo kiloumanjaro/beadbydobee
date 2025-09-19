@@ -10,22 +10,17 @@ import {
   Ruler,
 } from "lucide-react";
 import { Button } from "./ui/button";
+import { encodeDesign, type BraceletDesign } from "@/lib/converter";
 
 interface CustomizationOptionsProps {
   selectedSize: "small" | "medium" | "large" | "xl" | "2x";
-  codeVisibility: boolean;
-  codeContent: string;
-  setCodeContent: (val: string) => void;
   braceletDesign: { [key: number]: string };
   onSizeChange: (size: "small" | "medium" | "large" | "xl" | "2x") => void;
-  onGenerateCode: () => void;
   onImportCode: () => void;
-  onCopyCode: () => void;
   importCode: string;
   importError: string;
   setImportCode: (val: string) => void;
-  copiedCode: boolean;
-  setCopiedCode: (val: boolean) => void;
+  beadSlots: 5 | 10 | 15 | 20 | 30;
 }
 
 const SIZE_OPTIONS = [
@@ -38,18 +33,12 @@ const SIZE_OPTIONS = [
 
 export default function CustomizationOptions({
   selectedSize,
-  codeVisibility,
-  codeContent,
-  setCodeContent,
   braceletDesign,
   onSizeChange,
-  onGenerateCode,
   onImportCode,
-  onCopyCode,
   importCode,
   setImportCode,
-  copiedCode,
-  setCopiedCode,
+  beadSlots,
 }: CustomizationOptionsProps) {
   // useEffect(() => {
   //   localStorage.clear();
@@ -69,6 +58,29 @@ export default function CustomizationOptions({
         return <Upload className="w-4.5 h-4.5 text-gray-600" />;
       default:
         return <Settings className="w-4.5 h-4.5 text-gray-600" />;
+    }
+  };
+
+  const [generatedCode, setGeneratedCode] = useState<string>("");
+  const showGeneratedCode = Boolean(generatedCode);
+  const [copied, setCopied] = useState(false);
+
+  const handleGenerateCode = () => {
+    const design: BraceletDesign = {
+      beadSelections: braceletDesign,
+      length: beadSlots,
+      createdAt: new Date().toISOString(),
+    };
+    const code = encodeDesign(design);
+    setGeneratedCode(code);
+  };
+
+  const handleCopyCode = async () => {
+    try {
+      await navigator.clipboard.writeText(generatedCode);
+      setCopied(true);
+    } catch (error) {
+      console.error("Failed to copy code:", error);
     }
   };
 
@@ -117,25 +129,25 @@ export default function CustomizationOptions({
               <input
                 type="text"
                 placeholder="Generate design code"
-                value={codeContent}
+                value={generatedCode}
                 readOnly
                 className="w-full px-3 py-2 text-sm text-[#727272] border border-gray-300 bg-gray-100 rounded-sm whitespace-nowrap  overflow-hidden focus:outline-none"
               />
             </div>
 
             {/* Copy or Generate */}
-            {codeVisibility && codeContent ? (
+            {showGeneratedCode && generatedCode ? (
               <Button
-                onClick={onCopyCode}
-                variant={!copiedCode ? "default" : "secondary"}
+                onClick={handleCopyCode}
+                variant={!copied ? "default" : "secondary"}
                 size="full"
-                disabled={copiedCode}
+                disabled={copied}
               >
-                {copiedCode ? "Copied" : "Copy"}
+                {copied ? "Copied" : "Copy"}
               </Button>
             ) : (
               <Button
-                onClick={onGenerateCode}
+                onClick={handleGenerateCode}
                 disabled={Object.keys(braceletDesign).length === 0}
                 variant="default"
                 size="full"
@@ -146,12 +158,12 @@ export default function CustomizationOptions({
             {/* Reset button */}
             <Button
               onClick={() => {
-                setCodeContent("");
-                setCopiedCode(false);
+                setGeneratedCode("");
+                setCopied(false);
               }}
-              variant={codeContent ? "destructive" : "secondary"}
+              variant={generatedCode ? "destructive" : "secondary"}
               size="icon"
-              disabled={!codeContent}
+              disabled={!generatedCode}
             >
               <RotateCcw className="w-5 h-5" />
             </Button>

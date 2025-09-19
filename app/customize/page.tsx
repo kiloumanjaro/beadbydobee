@@ -7,11 +7,7 @@ import BeadsEditor from "@/components/beads-editor";
 import CustomizationOptions, {
   SIZE_OPTIONS,
 } from "@/components/customization-options";
-import {
-  encodeDesign,
-  decodeDesign,
-  type BraceletDesign,
-} from "@/lib/converter";
+import { decodeDesign, type BraceletDesign } from "@/lib/converter";
 import WarningPopup from "@/components/warning-popup";
 
 export default function Customize() {
@@ -28,11 +24,9 @@ export default function Customize() {
     [key: number]: string;
   }>({});
 
-  const [generatedCode, setGeneratedCode] = useState<string>("");
   const [importCode, setImportCode] = useState<string>("");
-  const showGeneratedCode = Boolean(generatedCode);
   const [importError, setImportError] = useState<string>("");
-  const [copied, setCopied] = useState(false);
+
   const isWarningVisible = Boolean(importError);
 
   useEffect(() => {
@@ -98,16 +92,6 @@ export default function Customize() {
     setBeadSelections(selections);
   };
 
-  const handleGenerateCode = () => {
-    const design: BraceletDesign = {
-      beadSelections,
-      length: slots,
-      createdAt: new Date().toISOString(),
-    };
-    const code = encodeDesign(design);
-    setGeneratedCode(code);
-  };
-
   const handleImportCode = () => {
     if (!importCode.trim()) {
       setImportError("Please enter a design code");
@@ -137,22 +121,12 @@ export default function Customize() {
       }
       setImportCode("");
       setImportError("");
-      setGeneratedCode("");
     } catch (error) {
       console.error("Error decoding design:", error);
       setImportError(
         "The design code you entered is invalid. Please check the code and try again."
       );
       return;
-    }
-  };
-
-  const handleCopyCode = async () => {
-    try {
-      await navigator.clipboard.writeText(generatedCode);
-      setCopied(true);
-    } catch (error) {
-      console.error("Failed to copy code:", error);
     }
   };
 
@@ -184,19 +158,13 @@ export default function Customize() {
       <header className="absolute w-full h-[100px] flex items-center justify-center">
         <CustomizationOptions
           selectedSize={selectedSize}
-          codeVisibility={showGeneratedCode}
-          codeContent={generatedCode}
-          setCodeContent={setGeneratedCode}
           braceletDesign={beadSelections}
           onSizeChange={handleSizeChange}
-          onGenerateCode={handleGenerateCode}
           onImportCode={handleImportCode}
-          onCopyCode={handleCopyCode}
           importCode={importCode}
           importError={importError}
           setImportCode={setImportCode}
-          copiedCode={copied}
-          setCopiedCode={setCopied}
+          beadSlots={slots}
         />
       </header>
 
