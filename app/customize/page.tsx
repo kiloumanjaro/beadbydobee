@@ -58,9 +58,7 @@ export default function Customize() {
     if (Object.keys(beadSelections).length > 0 || selectedSize !== "medium") {
       const design: BraceletDesign = {
         beadSelections,
-
         length: slots,
-
         createdAt: new Date().toISOString(),
       };
 
@@ -69,7 +67,6 @@ export default function Customize() {
 
         JSON.stringify({
           ...design,
-
           size: selectedSize,
         })
       );
@@ -84,8 +81,6 @@ export default function Customize() {
 
     setBeadSelections((prevSelections) => {
       const newSelections: { [key: number]: string } = {};
-
-      // Keep existing selections that fit in the new size
       Object.entries(prevSelections).forEach(([slotIndex, color]) => {
         const index = Number.parseInt(slotIndex);
         if (index < newSlots) {
@@ -121,25 +116,25 @@ export default function Customize() {
 
     try {
       const decoded = decodeDesign(importCode.trim());
-      if (!decoded) {
+      if (
+        !decoded ||
+        typeof decoded !== "object" ||
+        !decoded.beadSelections ||
+        typeof decoded.length !== "number"
+      ) {
         setImportError(
           "The design code you entered is invalid. Please check the code and try again."
         );
         return;
       }
-
-      // Update the design
       setBeadSelections(decoded.beadSelections);
 
-      // Update size based on length
       const sizeOption = SIZE_OPTIONS.find(
         (option) => option.beads === decoded.length
       );
       if (sizeOption) {
         setSelectedSize(sizeOption.id);
       }
-
-      // Clear states
       setImportCode("");
       setImportError("");
       setGeneratedCode("");
@@ -170,34 +165,22 @@ export default function Customize() {
     if (!isAllSlotsFilled()) {
       return;
     }
-    // Save bead selections to localStorage
+
     localStorage.setItem(
       "braceletDesign",
       JSON.stringify({
         beadSelections,
         length: slots,
-        size: selectedSize, // Save the selected size
+        size: selectedSize,
         createdAt: new Date().toISOString(),
       })
     );
 
-    // Save bead selections to localStorage
-    localStorage.setItem(
-      "braceletDesign",
-      JSON.stringify({
-        beadSelections,
-        length: slots,
-        size: selectedSize, // Save the selected size
-        createdAt: new Date().toISOString(),
-      })
-    );
-
-    // Navigate to confirm page
     router.push("/confirm");
   };
 
   return (
-    <div className="flex flex-col h-screen bg-[#EFEFEF]">
+    <div className="font-sans flex flex-col h-[100dvh] overflow-hidden bg-[#EFEFEF]">
       <header className="absolute w-full h-[100px] flex items-center justify-center">
         <CustomizationOptions
           selectedSize={selectedSize}
