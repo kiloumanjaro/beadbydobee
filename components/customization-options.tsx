@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import {
+  Home,
   ChevronDown,
   RotateCcw,
   Settings,
@@ -10,6 +11,7 @@ import {
   Ruler,
 } from "lucide-react";
 import { Button } from "./ui/button";
+import { useRouter } from "next/navigation";
 import { encodeDesign, type BraceletDesign } from "@/lib/converter";
 
 interface CustomizationOptionsProps {
@@ -45,11 +47,14 @@ export default function CustomizationOptions({
   // }, []);
   const [isOpen, setIsOpen] = useState(false);
   const [activeOption, setActiveOption] = useState<
-    "size" | "generate" | "import"
-  >("size");
+    "size" | "generate" | "import" | "options"
+  >("options");
+  const router = useRouter();
 
   const getActiveIcon = () => {
     switch (activeOption) {
+      case "options":
+        return <Home className="w-4.5 h-4.5 text-gray-600" />;
       case "size":
         return <Ruler className="w-4.5 h-4.5 text-gray-600" />;
       case "generate":
@@ -86,6 +91,31 @@ export default function CustomizationOptions({
 
   const renderOptionContent = () => {
     switch (activeOption) {
+      case "options":
+        return (
+          <div className="flex gap-2 items-center">
+            {/* Input field */}
+            <input
+              type="text"
+              value="" // always controlled
+              placeholder="Open dropdown to customize"
+              readOnly
+              className="w-full text-left text-[#727272] px-3 py-2 text-sm border border-gray-300 bg-gray-100 rounded-sm whitespace-nowrap overflow-hidden focus:outline-none"
+            />
+
+            {/* Size Options */}
+            <div className="flex h-9 gap-1">
+              <Button
+                variant="default"
+                size="full"
+                onClick={() => router.push("/")}
+              >
+                Home
+              </Button>
+            </div>
+          </div>
+        );
+
       case "size":
         const selectedBeads =
           SIZE_OPTIONS.find((option) => option.id === selectedSize)?.beads ?? 0;
@@ -225,6 +255,16 @@ export default function CustomizationOptions({
       {isOpen && (
         <div className="absolute top-11 left-3 w-18 bg-[#f3f3f3] border border-t-0 border-b-gray-200 rounded-b-sm ">
           <div className="p-2">
+            <button
+              onClick={() => {
+                setActiveOption("options");
+                setIsOpen(false);
+              }}
+              className="w-full flex items-center justify-center gap-3 p-3 text-left hover:bg-white rounded-sm transition-colors"
+            >
+              <Home className="w-4.5 h-4.5 text-gray-600" />
+            </button>
+
             <button
               onClick={() => {
                 setActiveOption("size");

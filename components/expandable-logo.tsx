@@ -17,7 +17,7 @@ export function ExpandableLogo({ isHome }: ExpandableLogoProps) {
   const navItems = [
     { label: "Create", route: "/customize" },
     { label: "Designs", route: "/designs" },
-    { label: "Contacts", route: "/contacts" }, // Add Contacts to the list
+    { label: "Contact", route: "/contact" },
   ];
 
   const handleNavigation = (route: string) => {

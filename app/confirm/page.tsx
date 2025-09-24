@@ -45,10 +45,18 @@ export default function Confirm() {
   const handleConfirmOrder = () => {
     if (braceletDesign) {
       const encoded = encodeDesign(braceletDesign);
-      alert("Encoded design string:\n" + encoded);
+
+      // Build JotForm link
+      const jotformUrl = `https://form.jotform.com/252652123536049?productId=${encodeURIComponent(
+        encoded
+      )}`;
+
+      // Clear localStorage so user starts fresh next time
+      localStorage.removeItem("braceletDesign");
+
+      // Open JotForm in a new tab
+      window.open(jotformUrl, "_blank");
     }
-    localStorage.removeItem("braceletDesign");
-    router.push("/customize");
   };
 
   if (!braceletDesign) {
@@ -67,13 +75,13 @@ export default function Confirm() {
   }
 
   return (
-    <div className="flex flex-col h-screen bg-[#EFEFEF] overflow-hidden">
+    <div className="font-sans flex flex-col h-[100dvh] overflow-hidden bg-[#EFEFEF] overscroll-none">
       <header className="absolute w-full h-[100px] flex items-center justify-center">
         <ExpandableLogo isHome={isHome} />
       </header>
 
       <div className="flex-1 relative overflow-hidden">
-        <main className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 overflow-hidden">
+        <main className="absolute bottom-10 left-1/2 -translate-x-1/2 translate-y-1/2 overflow-hidden">
           <BraceletPreview
             length={braceletDesign.length}
             radius={500}

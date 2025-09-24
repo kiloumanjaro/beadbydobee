@@ -14,7 +14,7 @@ export default function Home() {
   const pathname = usePathname();
   const router = useRouter();
   const isHome = pathname === "/";
-  const [activeTab, setActiveTab] = useState("keychains");
+  const [activeTab, setActiveTab] = useState("bracelets");
 
   const handleCreateClick = () => {
     if (activeTab === "keychains") {
@@ -52,7 +52,7 @@ export default function Home() {
 
   return (
     <div
-      className="font-sans bg-cover bg-bottom h-[100dvh] overflow-hidden"
+      className="font-sans bg-cover bg-bottom h-[100dvh] overflow-hidden overscroll-none"
       style={{
         backgroundImage:
           activeTab === "about"

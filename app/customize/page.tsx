@@ -154,7 +154,7 @@ export default function Customize() {
   };
 
   return (
-    <div className="font-sans flex flex-col h-[100dvh] overflow-hidden bg-[#EFEFEF]">
+    <div className="font-sans flex flex-col h-[100dvh] overflow-hidden overscroll-none bg-[#EFEFEF]">
       <header className="absolute w-full h-[100px] flex items-center justify-center">
         <CustomizationOptions
           selectedSize={selectedSize}

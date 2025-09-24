@@ -16,6 +16,7 @@ export default function AboutContent() {
         </div>
         <span className="w-2xs font-base text-[#323232] text-center">
           <span>beadbydobee</span> is a custom keychain and bracelet business
+          based in cebu
         </span>
       </div>
     </div>

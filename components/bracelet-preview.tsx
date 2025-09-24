@@ -3,6 +3,7 @@
 import type React from "react";
 import { useState, useRef, useCallback, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { Undo2 } from "lucide-react";
 
 interface BraceletPreviewProps {
   length: number;
@@ -216,31 +217,31 @@ export default function BraceletPreview({
   return (
     <>
       <main className="absolute top-1/4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-8 z-2">
-        <div className="flex flex-col items-center gap-2">
-          <span className="text-2xl font-bold text-[#323232]">
-            Curated Piece
-          </span>
-          <p className="w-72 text-center text-[#323232]">
-            Review your custom bracelet design before placing your order
+        <div className="flex flex-col items-center gap-5">
+          <div className="flex flex-row items-center gap-3">
+            <span className="text-3xl font-bold text-[#323232]">
+              Curated Piece
+            </span>
+            <Button
+              variant="secondary"
+              onClick={onCustomize}
+              size="icon"
+              className="size-8 px-3 shadow-none"
+            >
+              <Undo2 className="w-0.5 h-0.5 text-[#727272]" />
+            </Button>
+          </div>
+
+          <p className="w-80 text-center text-[#323232]">
+            Review and confirm your custom bracelet design before placing your
+            order
           </p>
         </div>
 
         <div className="flex gap-4 items-center flex-row sm:flex-row">
           <div className="flex gap-4 items-center flex-col sm:flex-row">
-            <Button
-              variant="outline"
-              onClick={onCustomize}
-              className="rounded-lg h-10 px-8 border-[#8AB5D5] text-[#8AB5D5] hover:bg-[#8AB5D5] hover:text-white bg-transparent"
-            >
-              Back to Customize
-            </Button>
-            <Button
-              onClick={onConfirm}
-              variant="default"
-              size="lg"
-              className="w-40"
-            >
-              Confirm Order
+            <Button onClick={onConfirm} variant="default" size="lg">
+              Confirm
             </Button>
           </div>
         </div>
