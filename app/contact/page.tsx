@@ -18,7 +18,8 @@ export default function Contact() {
         />
       ),
       label: "Facebook",
-      onClick: () => window.open("https://www.facebook.com", "_blank"),
+      onClick: () =>
+        window.open("https://www.facebook.com/krishna.baranggot", "_blank"),
     },
     {
       icon: <Image src="/socials/mail.svg" alt="Mail" width={32} height={32} />,
@@ -40,7 +41,8 @@ export default function Contact() {
         />
       ),
       label: "Instagram",
-      onClick: () => window.open("https://www.instagram.com/", "_blank"),
+      onClick: () =>
+        window.open("https://www.instagram.com/beadbydobee", "_blank"),
     },
   ];
 

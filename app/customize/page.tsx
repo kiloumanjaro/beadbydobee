@@ -9,6 +9,7 @@ import CustomizationOptions, {
 } from "@/components/customization-options";
 import { decodeDesign, type BraceletDesign } from "@/lib/converter";
 import WarningPopup from "@/components/warning-popup";
+import AIChatbot from "@/components/ai-chatbot";
 
 export default function Customize() {
   const router = useRouter();
@@ -153,6 +154,15 @@ export default function Customize() {
     router.push("/confirm");
   };
 
+  const handleAIDesignGenerated = (design: {
+    beadSelections: { [key: number]: string };
+    explanation: string;
+  }) => {
+    setBeadSelections(design.beadSelections);
+    // Show success message
+    setImportError("");
+  };
+
   return (
     <div className="font-sans flex flex-col h-[100dvh] overflow-hidden overscroll-none bg-[#EFEFEF]">
       <header className="absolute w-full h-[100px] flex items-center justify-center">
@@ -208,6 +218,12 @@ export default function Customize() {
           }}
         />
       </main>
+
+      {/* AI Chatbot */}
+      <AIChatbot
+        braceletSize={slots}
+        onDesignGenerated={handleAIDesignGenerated}
+      />
     </div>
   );
 }

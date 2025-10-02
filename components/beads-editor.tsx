@@ -9,6 +9,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { getAllBeadFilenames } from "@/lib/bead-metadata";
 
 interface BeadsEditorProps {
   length: number;
@@ -16,36 +17,8 @@ interface BeadsEditorProps {
   initialSelections?: { [key: number]: string };
 }
 
-// Sample bead images - you can replace these with your actual image URLs
-const BEAD_IMAGES = [
-  "/beads/bead1.png",
-  "/beads/bead2.png",
-  "/beads/bead3.png",
-  "/beads/bead4.png",
-  "/beads/bead5.png",
-  "/placeholder-fs8gh.png",
-  "/placeholder-8kspz.png",
-  "/placeholder-ml7bv.png",
-  "/placeholder-lwtyj.png",
-  "/placeholder-29eb6.png",
-  "/placeholder-3x8ky.png",
-  "/placeholder-81j0q.png",
-  "/placeholder-hyp5g.png",
-  "/placeholder-bqzcp.png",
-  "/placeholder-j6xuj.png",
-  "/placeholder-tr51z.png",
-  "/placeholder-4tzde.png",
-  "/placeholder-b78f9.png",
-  "/placeholder-6pnvc.png",
-  "/placeholder-rnqmq.png",
-  "/placeholder.svg?height=100&width=100",
-  "/placeholder.svg?height=100&width=100",
-  "/placeholder.svg?height=100&width=100",
-  "/placeholder.svg?height=100&width=100",
-  "/placeholder.svg?height=100&width=100",
-  "/placeholder.svg?height=100&width=100",
-  "/placeholder.svg?height=100&width=100",
-];
+// Get bead images from metadata catalog
+const BEAD_IMAGES = getAllBeadFilenames();
 
 export default function BeadsEditor({
   length,

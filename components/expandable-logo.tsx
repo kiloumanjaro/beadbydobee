@@ -11,7 +11,7 @@ interface ExpandableLogoProps {
 export function ExpandableLogo({ isHome }: ExpandableLogoProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
-  const [activeItem, setActiveItem] = useState<string | null>("Contacts"); // Set "Contacts" as the initial active item
+  const [activeItem, setActiveItem] = useState<string | null>(null);
   const router = useRouter();
 
   const navItems = [
@@ -45,8 +45,8 @@ export function ExpandableLogo({ isHome }: ExpandableLogoProps) {
     >
       <span
         className={cn(
-          "text-xl font-medium drop-shadow-xs cursor-pointer",
-          isHome ? "text-white" : "text-[#727272]"
+          "text-xl font-medium drop-shadow-xs cursor-pointer transition-colors duration-200",
+          isHome ? "text-white hover:text-gray-200" : "text-[#727272] hover:text-[#333333]"
         )}
         onClick={handleLogoClick}
       >
