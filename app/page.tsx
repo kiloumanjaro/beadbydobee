@@ -18,7 +18,7 @@ export default function Home() {
 
   const handleCreateClick = () => {
     if (activeTab === "keychains") {
-      router.push("/design");
+      router.push("/choose");
     } else if (activeTab === "bracelets") {
       router.push("/customize");
     } else if (activeTab === "about") {

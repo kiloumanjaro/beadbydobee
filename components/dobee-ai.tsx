@@ -4,8 +4,8 @@ export function DobeeAi() {
       <style>{`
         .crystal-ball-container {
           position: relative;
-          width: 120px;
-          height: 120px;
+          width: 150px;
+          height: 150px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -13,8 +13,8 @@ export function DobeeAi() {
 
         .crystal-ball-image {
           position: relative;
-          width: 120px;
-          height: 120px;
+          width: 150px;
+          height: 150px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -49,7 +49,7 @@ export function DobeeAi() {
       <div className="crystal-ball-container">
         <div className="crystal-ball-image">
           <img
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/input-LN0iQQWJHn9ax4cb1uqCl7y76TbKBr.jpeg"
+            src="/logo.png"
             alt="Bead by Dobee cloud"
             className="floating-image"
           />

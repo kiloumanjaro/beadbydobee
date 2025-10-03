@@ -20,6 +20,7 @@ import {
 import { cn } from "@/lib/utils";
 import SparklesIcon from "@/components/sparkles-icon";
 import SparkleIcon from "@/components/sparkle-icon";
+import { DobeeAi } from "@/components/dobee-ai";
 
 interface Message {
   role: "user" | "assistant";
@@ -42,13 +43,13 @@ export default function AIChatbot({
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      content:
-        "Hi! I'm your AI bracelet designer. Tell me what vibe or mood you're going for, and I'll create a custom design for you! 🎨",
+      content: "Ask me anything!",
     },
   ]);
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [hasLatestDesign, setHasLatestDesign] = useState(false);
+  const [hasUserSent, setHasUserSent] = useState(false);
   const [openCombobox, setOpenCombobox] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -65,6 +66,9 @@ export default function AIChatbot({
 
     const userMessage = inputValue.trim();
     setInputValue("");
+
+    // Mark that user has sent their first message (hide crystal ball)
+    setHasUserSent(true);
 
     // Add user message
     setMessages((prev) => [...prev, { role: "user", content: userMessage }]);
@@ -148,14 +152,14 @@ export default function AIChatbot({
     <>
       {/* Floating Chat Button */}
       {!isOpen && (
-        <button
+        <Button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 z-50 bg-gradient-to-b from-[#8AB5D5] to-[#6EA6BF] text-white rounded-full p-4 shadow-lg hover:shadow-xl transition-all hover:scale-105 flex items-center gap-2"
+          size="icon"
+          className="fixed bottom-6 right-6 z-50 p-5 text-white rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105 flex items-center gap-2"
           aria-label="Open AI Designer"
         >
-          <SparklesIcon className="w-6 h-6" />
-          <span className="pr-2 font-medium">AI Designer</span>
-        </button>
+          <SparklesIcon className="w-20 h-20" />
+        </Button>
       )}
 
       {/* Backdrop/Overlay */}
@@ -185,6 +189,17 @@ export default function AIChatbot({
 
           {/* Messages */}
           <div className="flex-1 overflow-y-auto p-4 space-y-3">
+            {/* DobeeAi Crystal Ball - Show only before user sends first message */}
+            {!hasUserSent && (
+              <div
+                className={`flex flex-col items-center justify-center gap-4 transition-opacity duration-500 ${
+                  hasUserSent ? "opacity-0" : "opacity-100"
+                }`}
+              >
+                <DobeeAi />
+              </div>
+            )}
+
             {messages.map((message, index) => (
               <div
                 key={index}
@@ -208,7 +223,7 @@ export default function AIChatbot({
 
             {isLoading && (
               <div className="flex justify-start">
-                <div className="bg-gray-100 text-gray-800 rounded-lg p-3">
+                <div className="bg-white text-gray-800 rounded-lg p-3">
                   <Loader2 className="w-5 h-5 animate-spin" />
                 </div>
               </div>
@@ -219,20 +234,20 @@ export default function AIChatbot({
 
           {/* Apply Design Button */}
           {hasLatestDesign && !isLoading && (
-            <div className="px-4 pb-2">
+            <div className="absolute w-full bottom-25 px-4">
               <Button
                 onClick={handleApplyDesign}
+                size="lg"
                 variant="default"
-                size="sm"
                 className="w-full"
               >
-                Apply Design to Bracelet
+                Apply to Bracelet
               </Button>
             </div>
           )}
 
           {/* Input */}
-          <div className="p-2">
+          <div className="pb-2 px-2">
             <div className="flex gap-2 bg-white shadow-sm rounded-t-lg">
               <input
                 type="text"
