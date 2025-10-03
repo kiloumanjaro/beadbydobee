@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { X, Send, Loader2, Check, ChevronsUpDown } from "lucide-react";
+import { X, Send, Loader2, Check, ChevronsUpDown, Pencil } from "lucide-react";
 import { EXAMPLE_PROMPTS } from "@/lib/gemini-service";
 import {
   Popover,
@@ -43,7 +43,7 @@ export default function AIChatbot({
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      content: "Ask me anything!",
+      content: "Ask me anything 🎨",
     },
   ]);
   const [inputValue, setInputValue] = useState("");
@@ -51,6 +51,7 @@ export default function AIChatbot({
   const [hasLatestDesign, setHasLatestDesign] = useState(false);
   const [hasUserSent, setHasUserSent] = useState(false);
   const [openCombobox, setOpenCombobox] = useState(false);
+  const [isApplyButtonHovered, setIsApplyButtonHovered] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -148,6 +149,15 @@ export default function AIChatbot({
     }
   }, [messages]);
 
+  const handleClose = () => {
+    setIsOpen(false);
+    // Clear any unapplied designs from session storage
+    if (typeof window !== "undefined") {
+      sessionStorage.removeItem("latestAIDesign");
+      setHasLatestDesign(false);
+    }
+  };
+
   return (
     <>
       {/* Floating Chat Button */}
@@ -166,7 +176,7 @@ export default function AIChatbot({
       {isOpen && (
         <div
           className="fixed inset-0 bg-black/50 z-40 transition-opacity duration-300"
-          onClick={() => setIsOpen(false)}
+          onClick={handleClose}
         />
       )}
 
@@ -180,7 +190,7 @@ export default function AIChatbot({
               <h3 className="font-medium text-sm">AI Designer</h3>
             </div>
             <button
-              onClick={() => setIsOpen(false)}
+              onClick={handleClose}
               className="border-transparent hover:border-gray-300 bg-transparent hover:bg-gray-100 rounded-full p-2 transition-colors"
             >
               <X className="w-4 h-4 text-[#727272]" />
@@ -234,14 +244,20 @@ export default function AIChatbot({
 
           {/* Apply Design Button */}
           {hasLatestDesign && !isLoading && (
-            <div className="absolute w-full bottom-25 px-4">
+            <div className="absolute bottom-25 right-4">
               <Button
                 onClick={handleApplyDesign}
-                size="lg"
+                size={isApplyButtonHovered ? "lg" : "icon"}
                 variant="default"
-                className="w-full"
+                onMouseEnter={() => setIsApplyButtonHovered(true)}
+                onMouseLeave={() => setIsApplyButtonHovered(false)}
+                className={` rounded-sm ${
+                  isApplyButtonHovered ? "w-50 h-10" : "w-10 h-10"
+                }`}
               >
-                Apply to Bracelet
+                {!isApplyButtonHovered && <Pencil className="w-4 h-4" />}
+
+                {isApplyButtonHovered && "Apply to Bracelet"}
               </Button>
             </div>
           )}

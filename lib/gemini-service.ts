@@ -38,7 +38,7 @@ RULES:
     "1": "/beads/white-pure.png",
     ...
   },
-  "explanation": "Brief explanation of the design choices and how they match the vibe"
+  "explanation": "A concise 2-3 sentence explanation of the design choices and how they match the vibe"
 }
 
 The "beadSelections" object must have keys from 0 to ${
