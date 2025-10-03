@@ -184,7 +184,7 @@ export default function AIChatbot({
       {isOpen && (
         <div className="fixed bottom-6 right-6 z-50 w-96 h-[500px] bg-[#eeeeee] rounded-lg shadow-2xl flex flex-col">
           {/* Header */}
-          <div className=" text-[#323232] py-3 px-4 rounded-t-lg flex items-center justify-between">
+          <div className="text-[#323232] py-3 px-4 rounded-t-lg flex items-center justify-between">
             <div className="flex items-center gap-2">
               <SparklesIcon className="w-5 h-5 text-[#6EA6BF]" />
               <h3 className="font-medium text-sm">AI Designer</h3>
@@ -202,11 +202,14 @@ export default function AIChatbot({
             {/* DobeeAi Crystal Ball - Show only before user sends first message */}
             {!hasUserSent && (
               <div
-                className={`flex flex-col items-center justify-center gap-4 transition-opacity duration-500 ${
+                className={`flex flex-col items-center justify-center gap-2 transition-opacity duration-500  ${
                   hasUserSent ? "opacity-0" : "opacity-100"
                 }`}
               >
                 <DobeeAi />
+                <span className="w-44 text-center text-xs text-[#727272] mb-5">
+                  I'm dobee, your personal bracelet asisstant
+                </span>
               </div>
             )}
 
@@ -251,13 +254,24 @@ export default function AIChatbot({
                 variant="default"
                 onMouseEnter={() => setIsApplyButtonHovered(true)}
                 onMouseLeave={() => setIsApplyButtonHovered(false)}
-                className={` rounded-sm ${
+                className={`rounded-sm transition-all duration-300 overflow-hidden ${
                   isApplyButtonHovered ? "w-50 h-10" : "w-10 h-10"
                 }`}
               >
-                {!isApplyButtonHovered && <Pencil className="w-4 h-4" />}
-
-                {isApplyButtonHovered && "Apply to Bracelet"}
+                {!isApplyButtonHovered && (
+                  <Pencil className="w-4 h-4  transition-all duration-300" />
+                )}
+                {isApplyButtonHovered && (
+                  <span
+                    className={`whitespace-nowrap transition-opacity duration-200 ${
+                      isApplyButtonHovered
+                        ? "opacity-100 delay-150"
+                        : "opacity-0"
+                    }`}
+                  >
+                    Apply to Bracelet
+                  </span>
+                )}
               </Button>
             </div>
           )}

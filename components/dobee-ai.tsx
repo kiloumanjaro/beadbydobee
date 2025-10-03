@@ -3,9 +3,10 @@ export function DobeeAi() {
     <>
       <style>{`
         .crystal-ball-container {
+          // background-color: red;
           position: relative;
-          width: 150px;
-          height: 150px;
+          width: 180px;
+          height: 100px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -13,8 +14,8 @@ export function DobeeAi() {
 
         .crystal-ball-image {
           position: relative;
-          width: 150px;
-          height: 150px;
+          width: 180px;
+          height: 180px;
           display: flex;
           align-items: center;
           justify-content: center;
