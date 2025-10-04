@@ -11,146 +11,181 @@ export interface BeadMetadata {
 
 export const BEAD_CATALOG: BeadMetadata[] = [
   {
-    id: "blue-calm",
-    filename: "/beads/blue-calm.png",
-    color: "blue",
-    vibe: ["calm", "peaceful", "serene", "ocean", "tranquil"],
-    description: "Calming blue bead with ocean vibes",
-  },
-  {
-    id: "red-passionate",
-    filename: "/beads/red-passionate.png",
-    color: "red",
-    vibe: ["passionate", "energetic", "bold", "love", "vibrant"],
-    description: "Bold red bead full of passion and energy",
-  },
-  {
-    id: "pink-romantic",
-    filename: "/beads/pink-romantic.png",
-    color: "pink",
-    vibe: ["romantic", "soft", "sweet", "gentle", "feminine"],
-    description: "Soft pink bead with romantic charm",
-  },
-  {
-    id: "green-natural",
-    filename: "/beads/green-natural.png",
-    color: "green",
-    vibe: ["natural", "fresh", "growth", "harmony", "balanced"],
-    description: "Fresh green bead representing nature and growth",
-  },
-  {
-    id: "purple-mystical",
-    filename: "/beads/purple-mystical.png",
-    color: "purple",
-    vibe: ["mystical", "spiritual", "creative", "magical", "dreamy"],
-    description: "Mystical purple bead for creative spirits",
-  },
-  {
-    id: "yellow-cheerful",
-    filename: "/beads/yellow-cheerful.png",
-    color: "yellow",
-    vibe: ["cheerful", "happy", "sunny", "optimistic", "bright"],
-    description: "Bright yellow bead radiating cheerfulness",
-  },
-  {
-    id: "orange-energetic",
-    filename: "/beads/orange-energetic.png",
-    color: "orange",
-    vibe: ["energetic", "enthusiastic", "warm", "adventurous", "fun"],
-    description: "Energetic orange bead for adventurous souls",
-  },
-  {
-    id: "black-elegant",
-    filename: "/beads/black-elegant.png",
+    id: "black-disco_ball",
+    filename: "/beads/black-disco_ball.png",
     color: "black",
-    vibe: ["elegant", "sophisticated", "mysterious", "powerful", "classic"],
-    description: "Elegant black bead with timeless sophistication",
+    vibe: ["party", "disco", "glam", "nightlife", "sparkling"],
+    description: "Black disco ball bead for party vibes",
   },
   {
-    id: "white-pure",
-    filename: "/beads/white-pure.png",
-    color: "white",
-    vibe: ["pure", "clean", "minimalist", "peaceful", "fresh"],
-    description: "Pure white bead with minimalist elegance",
+    id: "blue_black-evil_eye",
+    filename: "/beads/blue_black-evil_eye.png",
+    color: "blue",
+    vibe: ["protection", "mystical", "spiritual", "traditional", "lucky"],
+    description: "Blue and black evil eye bead for protection",
   },
   {
-    id: "gold-luxurious",
-    filename: "/beads/gold-luxurious.png",
+    id: "blue-flower_charm",
+    filename: "/beads/blue-flower_charm.png",
+    color: "blue",
+    vibe: ["floral", "nature", "delicate", "pretty", "spring"],
+    description: "Blue flower charm bead",
+  },
+  {
+    id: "blue-smiley_face",
+    filename: "/beads/blue-smiley_face.png",
+    color: "blue",
+    vibe: ["happy", "cheerful", "fun", "positive", "playful"],
+    description: "Blue smiley face bead",
+  },
+  {
+    id: "dark_pink-flower_charm",
+    filename: "/beads/dark_pink-flower_charm.png",
+    color: "dark pink",
+    vibe: ["floral", "nature", "romantic", "feminine", "elegant"],
+    description: "Dark pink flower charm bead",
+  },
+  {
+    id: "dark_pink-popstar",
+    filename: "/beads/dark_pink-popstar.png",
+    color: "dark pink",
+    vibe: ["star", "celebrity", "glam", "trendy", "bold"],
+    description: "Dark pink popstar bead",
+  },
+  {
+    id: "gold-ocean",
+    filename: "/beads/gold-ocean.png",
     color: "gold",
-    vibe: ["luxurious", "glamorous", "wealthy", "precious", "confident"],
-    description: "Luxurious gold bead for a touch of glamour",
+    vibe: ["ocean", "beach", "wave", "nautical", "luxurious"],
+    description: "Gold ocean wave bead",
   },
   {
-    id: "silver-modern",
-    filename: "/beads/silver-modern.png",
+    id: "gold-rockstar",
+    filename: "/beads/gold-rockstar.png",
+    color: "gold",
+    vibe: ["star", "rock", "music", "edgy", "cool"],
+    description: "Gold rockstar bead",
+  },
+  {
+    id: "green-smiley_face",
+    filename: "/beads/green-smiley_face.png",
+    color: "green",
+    vibe: ["happy", "cheerful", "fun", "positive", "playful"],
+    description: "Green smiley face bead",
+  },
+  {
+    id: "light_pink-popstar",
+    filename: "/beads/light_pink-popstar.png",
+    color: "light pink",
+    vibe: ["star", "celebrity", "sweet", "trendy", "cute"],
+    description: "Light pink popstar bead",
+  },
+  {
+    id: "light_pink-smiley_face",
+    filename: "/beads/light_pink-smiley_face.png",
+    color: "light pink",
+    vibe: ["happy", "cheerful", "fun", "sweet", "playful"],
+    description: "Light pink smiley face bead",
+  },
+  {
+    id: "mint_green-popstar",
+    filename: "/beads/mint_green-popstar.png",
+    color: "mint green",
+    vibe: ["star", "celebrity", "fresh", "trendy", "cool"],
+    description: "Mint green popstar bead",
+  },
+  {
+    id: "orange-popstar",
+    filename: "/beads/orange-popstar.png",
+    color: "orange",
+    vibe: ["star", "celebrity", "energetic", "vibrant", "bold"],
+    description: "Orange popstar bead",
+  },
+  {
+    id: "orange-smiley_face",
+    filename: "/beads/orange-smiley_face.png",
+    color: "orange",
+    vibe: ["happy", "cheerful", "fun", "energetic", "playful"],
+    description: "Orange smiley face bead",
+  },
+  {
+    id: "pink-flower_charm",
+    filename: "/beads/pink-flower_charm.png",
+    color: "pink",
+    vibe: ["floral", "nature", "romantic", "feminine", "delicate"],
+    description: "Pink flower charm bead",
+  },
+  {
+    id: "purple-disco_ball",
+    filename: "/beads/purple-disco_ball.png",
+    color: "purple",
+    vibe: ["party", "disco", "glam", "nightlife", "sparkling"],
+    description: "Purple disco ball bead for party vibes",
+  },
+  {
+    id: "red-smiley_face",
+    filename: "/beads/red-smiley_face.png",
+    color: "red",
+    vibe: ["happy", "cheerful", "fun", "bold", "playful"],
+    description: "Red smiley face bead",
+  },
+  {
+    id: "silver-coquette",
+    filename: "/beads/silver-coquette.png",
     color: "silver",
-    vibe: ["modern", "sleek", "futuristic", "cool", "sophisticated"],
-    description: "Modern silver bead with sleek appeal",
+    vibe: ["elegant", "chic", "sophisticated", "trendy", "feminine"],
+    description: "Silver coquette bead",
   },
   {
-    id: "turquoise-bohemian",
-    filename: "/beads/turquoise-bohemian.png",
-    color: "turquoise",
-    vibe: ["bohemian", "free-spirited", "artistic", "unique", "wanderlust"],
-    description: "Bohemian turquoise bead for free spirits",
+    id: "yellow-flower_charm",
+    filename: "/beads/yellow-flower_charm.png",
+    color: "yellow",
+    vibe: ["floral", "nature", "sunny", "cheerful", "spring"],
+    description: "Yellow flower charm bead",
   },
   {
-    id: "coral-playful",
-    filename: "/beads/coral-playful.png",
-    color: "coral",
-    vibe: ["playful", "fun", "lively", "tropical", "youthful"],
-    description: "Playful coral bead with tropical vibes",
+    id: "yellow-popstar",
+    filename: "/beads/yellow-popstar.png",
+    color: "yellow",
+    vibe: ["star", "celebrity", "bright", "cheerful", "trendy"],
+    description: "Yellow popstar bead",
   },
   {
-    id: "lavender-dreamy",
-    filename: "/beads/lavender-dreamy.png",
-    color: "lavender",
-    vibe: ["dreamy", "relaxing", "gentle", "whimsical", "soothing"],
-    description: "Dreamy lavender bead for gentle souls",
+    id: "yellow-smiley_face",
+    filename: "/beads/yellow-smiley_face.png",
+    color: "yellow",
+    vibe: ["happy", "cheerful", "fun", "sunny", "playful"],
+    description: "Yellow smiley face bead",
   },
-  {
-    id: "rose-gold-chic",
-    filename: "/beads/rose-gold-chic.png",
-    color: "rose-gold",
-    vibe: ["chic", "trendy", "feminine", "elegant", "modern"],
-    description: "Chic rose gold bead combining elegance and trend",
-  },
-  // Placeholder beads - replace with actual bead data
-  {
-    id: "bead1",
-    filename: "/beads/bead1.png",
-    color: "mixed",
-    vibe: ["versatile", "unique"],
-    description: "Versatile bead design",
-  },
-  {
-    id: "bead2",
-    filename: "/beads/bead2.png",
-    color: "mixed",
-    vibe: ["versatile", "unique"],
-    description: "Versatile bead design",
-  },
-  {
-    id: "bead3",
-    filename: "/beads/bead3.png",
-    color: "mixed",
-    vibe: ["versatile", "unique"],
-    description: "Versatile bead design",
-  },
-  {
-    id: "bead4",
-    filename: "/beads/bead4.png",
-    color: "mixed",
-    vibe: ["versatile", "unique"],
-    description: "Versatile bead design",
-  },
-  {
-    id: "bead5",
-    filename: "/beads/bead5.png",
-    color: "mixed",
-    vibe: ["versatile", "unique"],
-    description: "Versatile bead design",
-  },
+  // Generic placeholder beads
+  // {
+  //   id: "bead1",
+  //   filename: "/beads/bead1.png",
+  //   color: "mixed",
+  //   vibe: ["versatile", "unique"],
+  //   description: "Versatile bead design",
+  // },
+  // {
+  //   id: "bead2",
+  //   filename: "/beads/bead2.png",
+  //   color: "mixed",
+  //   vibe: ["versatile", "unique"],
+  //   description: "Versatile bead design",
+  // },
+  // {
+  //   id: "bead3",
+  //   filename: "/beads/bead3.png",
+  //   color: "mixed",
+  //   vibe: ["versatile", "unique"],
+  //   description: "Versatile bead design",
+  // },
+  // {
+  //   id: "bead4",
+  //   filename: "/beads/bead4.png",
+  //   color: "mixed",
+  //   vibe: ["versatile", "unique"],
+  //   description: "Versatile bead design",
+  // },
 ];
 
 // Get all bead filenames for the editor
@@ -167,7 +202,9 @@ export const findBeadsByVibe = (vibe: string): BeadMetadata[] => {
 };
 
 // Get bead by filename
-export const getBeadByFilename = (filename: string): BeadMetadata | undefined => {
+export const getBeadByFilename = (
+  filename: string
+): BeadMetadata | undefined => {
   return BEAD_CATALOG.find((bead) => bead.filename === filename);
 };
 
@@ -175,6 +212,8 @@ export const getBeadByFilename = (filename: string): BeadMetadata | undefined =>
 export const getBeadCatalogForAI = (): string => {
   return BEAD_CATALOG.map(
     (bead, index) =>
-      `${index + 1}. ${bead.id}: ${bead.description} (Vibes: ${bead.vibe.join(", ")})`
+      `${index + 1}. ${bead.id}: ${bead.description} (Vibes: ${bead.vibe.join(
+        ", "
+      )})`
   ).join("\n");
 };
