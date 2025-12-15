@@ -26,11 +26,12 @@ TASK:
 Create a bracelet design with exactly ${braceletSize} beads based on the user's prompt.
 
 RULES:
-1. Select beads that match the requested vibe/mood/theme
-2. Create harmonious color combinations
-3. Consider pattern and flow (gradients, alternating, symmetrical, etc.)
-4. Use variety but maintain cohesion
-5. Return ONLY valid JSON in this exact format:
+1. You MUST ONLY use bead filenames from the "AVAILABLE BEADS" list above - do not create or modify filenames
+2. Select beads that match the requested vibe/mood/theme
+3. Create harmonious color combinations
+4. Consider pattern and flow (gradients, alternating, symmetrical, etc.)
+5. Use variety but maintain cohesion
+6. Return ONLY valid JSON in this exact format:
 
 {
   "beadSelections": {
