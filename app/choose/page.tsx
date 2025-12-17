@@ -39,12 +39,13 @@ export default function Home() {
 
         {/* Product Description */}
         <div className="flex flex-col items-center gap-3">
-          <span className="text-3xl font-bold text-[#323232] text-center">
-            Make it Yours
+          <span className="text-2xl font-bold text-[#323232] text-center flex items-center gap-3">
+            dobee does it all
+            <img src="/bee.png" alt="bee" className="w-6 h-6 inline-block" />
           </span>
-          <p className="text-lg text-center text-[#9ca3af] leading-relaxed text-pretty">
-            Your style, your way. Check out our personalized bracelets and
-            keychains!
+          <p className="text-center w-md text-base text-[#9ca3af] leading-relaxed ">
+            Your style, your way. Check out the personalized bracelets and
+            keychains we've made for our customers!
           </p>
         </div>
 

@@ -59,7 +59,7 @@ export function ExpandableLogo({ isHome }: ExpandableLogoProps) {
   return (
     <div
       className={cn(
-        "h-13 z-1 flex rounded-full items-center pl-6 pr-2 cursor-pointer transition-all duration-700 ease-in-out",
+        "h-13 z-1 flex rounded-full items-center pl-6 pr-2 cursor-pointer transition-all duration-500 ease-in-out",
         isHome
           ? "bg-white/20 backdrop-blur-md border border-white/30 shadow-lg text-white"
           : "bg-gradient-to-b from-[#ffffff] to-[#f3f3f3] text-[#727272] shadow-sm",
@@ -82,7 +82,7 @@ export function ExpandableLogo({ isHome }: ExpandableLogoProps) {
 
       <div
         className={cn(
-          "flex h-full items-center overflow-hidden transition-all duration-700 ease-in-out",
+          "flex h-full items-center overflow-hidden transition-all duration-500 ease-in-out",
           isHovered ? "opacity-100 max-w-xl" : "opacity-0 max-w-0"
         )}
       >
@@ -97,7 +97,7 @@ export function ExpandableLogo({ isHome }: ExpandableLogoProps) {
             <button
               className={cn(
                 "px-4 h-full justify-center text-sm border rounded-3xl whitespace-nowrap",
-                "transition-all duration-700 ease-in-out",
+                "transition-all duration-500 ease-in-out",
                 (activeItem === item.label && !hoveredItem) ||
                   hoveredItem === item.label
                   ? "border-gray-300 bg-gray-100 text-[#727272]"
@@ -119,7 +119,7 @@ export function ExpandableLogo({ isHome }: ExpandableLogoProps) {
         <div
           className={cn(
             "h-10 flex border border-gray-300 bg-gray-100 text-[#727272] px-2.5 rounded-full self-center items-center justify-center overflow-hidden",
-            "transition-all duration-700 ease-in-out delay-300"
+            "transition-all duration-500 ease-in-out delay-200"
           )}
         >
           <svg
