@@ -3,6 +3,7 @@
 import Stack from "@/components/image-stack";
 import { Button } from "@/components/ui/button";
 import { ExpandableLogo } from "@/components/expandable-logo";
+import AIChatbot from "@/components/ai-chatbot";
 
 export default function Home() {
   const images = [
@@ -19,6 +20,14 @@ export default function Home() {
       img: "https://images.unsplash.com/photo-1452626212852-811d58933cae?q=80&w=500&auto=format",
     },
   ];
+
+  const handleAIDesignGenerated = (design: {
+    beadSelections: { [key: number]: string };
+    explanation: string;
+  }) => {
+    // Design generation handled within AIChatbot component
+  };
+
   return (
     <main className="min-h-screen bg-[#f5f5f5] flex items-center justify-center p-8">
       <header className="absolute top-0 w-full h-[100px] flex items-center justify-center">
@@ -55,6 +64,9 @@ export default function Home() {
           </Button>
         </div>
       </div>
+
+      {/* AI Chatbot */}
+      <AIChatbot braceletSize={5} onDesignGenerated={handleAIDesignGenerated} />
     </main>
   );
 }
