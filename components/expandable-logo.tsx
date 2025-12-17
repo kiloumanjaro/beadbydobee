@@ -82,7 +82,7 @@ export function ExpandableLogo({ isHome }: ExpandableLogoProps) {
 
       <div
         className={cn(
-          "flex h-full items-center overflow-hidden transition-all duration-500 ease-in-out",
+          "flex h-full items-center gap-1 overflow-hidden transition-all duration-500 ease-in-out",
           isHovered ? "opacity-100 max-w-xl" : "opacity-0 max-w-0"
         )}
       >
