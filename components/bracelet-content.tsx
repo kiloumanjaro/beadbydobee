@@ -38,11 +38,12 @@ export default function BraceletContent() {
   // Define sticker configs for each breakpoint (visibility + positioning)
   const positionConfigs = {
     mobile: {
-      visible: ["sticker4", "sticker5", "sticker7"],
+      visible: ["sticker2", "sticker5", "sticker4", "sticker1"],
       positions: {
-        sticker4: { xPercent: -14.58, yPercent: 38.89 },
-        sticker5: { xPercent: -32.29, yPercent: 5.56 },
-        sticker7: { xPercent: 23.96, yPercent: 5.56 },
+        sticker1: { xPercent: -48, yPercent: -4.89 }, // Blue Ball
+        sticker5: { xPercent: 46.58, yPercent: 22.89 }, //Star
+        sticker2: { xPercent: 32.96, yPercent: 84.56 }, // Letter A
+        sticker4: { xPercent: -46.29, yPercent: 64.56 }, // Heart
       },
     },
     tablet: {
@@ -57,14 +58,14 @@ export default function BraceletContent() {
         "sticker8",
       ],
       positions: {
-        sticker1: { xPercent: 28.65, yPercent: 47.22 },
-        sticker2: { xPercent: -28.65, yPercent: 44.44 },
-        sticker3: { xPercent: 31.25, yPercent: 19.44 },
-        sticker4: { xPercent: -14.58, yPercent: 38.89 },
-        sticker5: { xPercent: -32.29, yPercent: 5.56 },
-        sticker6: { xPercent: 13.02, yPercent: 42.13 },
-        sticker7: { xPercent: 23.96, yPercent: 5.56 },
-        sticker8: { xPercent: -22.92, yPercent: 19.44 },
+        sticker1: { xPercent: 28.65, yPercent: 47.22 }, // Blue Ball
+        sticker2: { xPercent: -34.65, yPercent: 80.44 }, // Letter A
+        sticker3: { xPercent: 31.25, yPercent: 19.44 }, // Big Heart
+        sticker4: { xPercent: -2.58, yPercent: 65.89 }, // Heart
+        sticker5: { xPercent: -32.29, yPercent: 8.56 }, // Star
+        sticker6: { xPercent: 13.02, yPercent: 42.13 }, // Letter B
+        sticker7: { xPercent: 23.96, yPercent: 5.56 }, // Pearl
+        sticker8: { xPercent: -22.92, yPercent: 22.44 }, // Big Star
       },
     },
     desktop: {
@@ -111,18 +112,20 @@ export default function BraceletContent() {
   };
 
   return (
-    <div className="flex flex-col gap-5 items-center bg-red-400">
-      <ModelViewer
-        width={700}
-        height={700}
-        url="/models/bracelet.glb"
-        defaultRotationX={0}
-        defaultRotationY={0}
-        autoRotate
-        showScreenshotButton={false}
-        enableManualZoom={false}
-        autoFrame
-      />
+    <div className="flex flex-col gap-5  w-screen h-screen items-center">
+      <div className="flex w-full h-full justify-center items-center ">
+        <ModelViewer
+          width={700}
+          height={700}
+          url="/models/bracelet.glb"
+          defaultRotationX={0}
+          defaultRotationY={0}
+          autoRotate
+          showScreenshotButton={false}
+          enableManualZoom={false}
+          autoFrame
+        />
+      </div>
 
       {/* Sticker 1 */}
       {visibleStickers.includes("sticker1") && (

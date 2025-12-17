@@ -6,6 +6,7 @@ import { TabNavigation } from "@/components/tab-navigation";
 import AboutContent from "@/components/about-content";
 import BraceletContent from "@/components/bracelet-content";
 import KeychainContent from "@/components/keychain-content";
+import { useResponsiveSpacing } from "@/hooks/use-responsive-spacing";
 
 import { usePathname, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -15,6 +16,7 @@ export default function Home() {
   const router = useRouter();
   const isHome = pathname === "/";
   const [activeTab, setActiveTab] = useState("bracelets");
+  const { spacing } = useResponsiveSpacing();
 
   const handleCreateClick = () => {
     if (activeTab === "keychains") {
@@ -70,7 +72,7 @@ export default function Home() {
           {renderContent()}
         </div>
       </main>
-      <div className="absolute bottom-24 left-1/2 -translate-x-1/2">
+      <div className={`absolute ${spacing.ctaButton} left-1/2 -translate-x-1/2`}>
         <Button
           onClick={handleCreateClick}
           variant={getButtonVariant()}
