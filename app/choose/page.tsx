@@ -1,5 +1,8 @@
+"use client";
+
 import Stack from "@/components/image-stack";
 import { Button } from "@/components/ui/button";
+import { ExpandableLogo } from "@/components/expandable-logo";
 
 export default function Home() {
   const images = [
@@ -18,6 +21,10 @@ export default function Home() {
   ];
   return (
     <main className="min-h-screen bg-[#f5f5f5] flex items-center justify-center p-8">
+      <header className="absolute top-0 w-full h-[100px] flex items-center justify-center">
+        <ExpandableLogo isHome={false} />
+      </header>
+
       <div className="flex flex-col items-center max-w-2xl">
         {/* Card Stack */}
         <div className="mb-12">
@@ -30,31 +37,22 @@ export default function Home() {
           />
         </div>
 
-        {/* Product Code Badge */}
-        <div className="mb-6">
-          <span className="inline-block px-4 py-2 bg-[#e8eef5] text-[#8b9aab] text-sm font-mono tracking-wider rounded">
-            HT-DHJ-GW-001
-          </span>
-        </div>
-
         {/* Product Description */}
-        <div className="text-center mb-8 space-y-2">
-          <h1 className="text-3xl font-medium text-[#1a1a1a] text-balance">
-            Engineered for unpredictable spring days,
-          </h1>
-          <p className="text-lg text-[#9ca3af] leading-relaxed text-pretty">
-            this lightweight down jacket delivers just the right amount of
-            warmth without overheating.
+        <div className="flex flex-col items-center gap-3">
+          <span className="text-3xl font-bold text-[#323232] text-center">
+            Make it Yours
+          </span>
+          <p className="text-lg text-center text-[#9ca3af] leading-relaxed text-pretty">
+            Your style, your way. Check out our personalized bracelets and
+            keychains!
           </p>
         </div>
 
-        {/* CTA Button */}
-        <Button
-          size="lg"
-          className="bg-[#2a2a2a] hover:bg-[#1a1a1a] text-white px-8 py-6 text-base rounded-full"
-        >
-          View Collection
-        </Button>
+        <div className="mt-10">
+          <Button variant="default" size="lg">
+            View
+          </Button>
+        </div>
       </div>
     </main>
   );

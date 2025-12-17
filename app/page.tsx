@@ -72,7 +72,9 @@ export default function Home() {
           {renderContent()}
         </div>
       </main>
-      <div className={`absolute ${spacing.ctaButton} left-1/2 -translate-x-1/2`}>
+      <div
+        className={`absolute ${spacing.ctaButton} left-1/2 -translate-x-1/2`}
+      >
         <Button
           onClick={handleCreateClick}
           variant={getButtonVariant()}
