@@ -1,8 +1,8 @@
 "use client";
 
+import { Heart, ShoppingCart, Link as LinkIcon, Watch } from "lucide-react";
+import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { Heart } from "lucide-react";
-import { useState } from "react";
 
 interface ProductCardProps {
   id: string;
@@ -13,6 +13,7 @@ interface ProductCardProps {
   isNew?: boolean;
   isPopular?: boolean;
   category: "bracelet" | "keychain";
+  description?: string;
 }
 
 export default function ProductCard({
@@ -24,85 +25,92 @@ export default function ProductCard({
   isNew = false,
   isPopular = false,
   category,
+  description,
 }: ProductCardProps) {
   const [isFavorited, setIsFavorited] = useState(false);
+  const [isButtonHovered, setIsButtonHovered] = useState(false);
+  const [showText, setShowText] = useState(false);
+  const textTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Get the category icon
+  const CategoryIcon = category === "keychain" ? LinkIcon : Watch;
+
+  const handleButtonMouseEnter = () => {
+    // Clear any pending timeout
+    if (textTimeoutRef.current) {
+      clearTimeout(textTimeoutRef.current);
+      textTimeoutRef.current = null;
+    }
+    setIsButtonHovered(true);
+    setShowText(true);
+  };
+
+  const handleButtonMouseLeave = () => {
+    setIsButtonHovered(false);
+    setShowText(false);
+  };
 
   return (
-    <div className="bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden group">
-      {/* Image Container */}
-      <div className="relative aspect-square overflow-hidden">
-        <img
-          src={image}
-          alt={name}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-        />
-        
-        {/* Badges */}
-        <div className="absolute top-2 left-2 flex flex-col gap-1">
-          {isNew && (
-            <span className="bg-green-500 text-white text-xs px-2 py-1 rounded-full">
-              New
-            </span>
-          )}
-          {isPopular && (
-            <span className="bg-blue-500 text-white text-xs px-2 py-1 rounded-full">
-              Popular
-            </span>
-          )}
-        </div>
-
-        {/* Favorite Button */}
-        <button
-          onClick={() => setIsFavorited(!isFavorited)}
-          className="absolute top-2 right-2 p-2 rounded-full bg-white/80 hover:bg-white transition-colors"
-        >
-          <Heart
-            className={`w-4 h-4 ${
-              isFavorited
-                ? "fill-red-500 text-red-500"
-                : "text-gray-600"
-            }`}
-          />
-        </button>
-
-        {/* Quick View Overlay */}
-        <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-          <Button variant="secondary" size="sm">
-            Quick View
-          </Button>
-        </div>
-      </div>
-
-      {/* Product Info */}
-      <div className="p-4">
-        {/* Category */}
-        <span className="text-xs uppercase tracking-wide text-gray-500 mb-1 block">
-          {category}
-        </span>
-
-        {/* Product Name */}
-        <h3 className="font-medium text-gray-900 mb-2 line-clamp-2 leading-tight">
-          {name}
-        </h3>
-
-
-
+    <div className="bg-[#e2e2e2] border border-[#727272]/20 p-2 rounded-lg  transition-all duration-300 overflow-hidden group">
+      {/* Product Info Header */}
+      <div className="pb-3.5 p-1.5 flex-col flex items-center justify-between">
         {/* Price */}
-        <div className="flex items-center gap-2 mb-2">
-          <span className="text-lg font-bold text-gray-900">
-            ${price.toFixed(2)}
-          </span>
+        <div className="flex items-center gap-1.5 flex-shrink-0">
+          <span className="text-sm text-[#727272]">${price.toFixed(2)}</span>
           {originalPrice && (
-            <span className="text-sm text-gray-500 line-through">
+            <span className="text-xs text-gray-400 line-through">
               ${originalPrice.toFixed(2)}
             </span>
           )}
         </div>
+        {/* Category Icon and Name */}
+        <h3 className="font-medium text-base text-[#727272] truncate">
+          {name}
+        </h3>
+      </div>
 
-        {/* Add to Cart Button */}
-        <Button className="w-full" size="sm">
-          Add to Cart
-        </Button>
+      {/* Image Container */}
+      <div className="relative border border-[#cccccc] rounded-lg overflow-hidden bg-gradient-to-b from-[#ffffff] to-[#f3f3f3] h-72">
+        <img
+          src={image}
+          alt={name}
+          className="w-full h-full object-cover group-hover:opacity-0 transition-opacity duration-300"
+        />
+
+        {/* Description Overlay */}
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/95 p-4 flex flex-col">
+          {description && (
+            <p className="text-gray-700 text-sm leading-relaxed flex-1">
+              {description}
+            </p>
+          )}
+
+          {/* Cart Button */}
+          <Button
+            variant="default"
+            className="ml-auto mt-auto flex items-center justify-center overflow-hidden"
+            onMouseEnter={handleButtonMouseEnter}
+            onMouseLeave={handleButtonMouseLeave}
+            style={{
+              padding: "0.5rem",
+              paddingRight: isButtonHovered ? "1rem" : "0.5rem",
+              paddingLeft: isButtonHovered ? "1rem" : "0.5rem",
+              minWidth: "2.5rem",
+              height: "2.5rem",
+              transition: isButtonHovered
+                ? "all 0.3s ease-in-out"
+                : "all 0.5s ease-in-out",
+            }}
+          >
+            <ShoppingCart className="w-5 h-5 flex-shrink-0" />
+            {showText && (
+              <span className=" flex flex-row gap-1 leading-tight text-xs">
+                <span>Buy</span>
+                <span>Now</span>
+              </span>
+            )}
+          </Button>
+        </div>
       </div>
     </div>
   );

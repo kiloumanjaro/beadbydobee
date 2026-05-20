@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { useResponsiveSpacing } from "@/hooks/use-responsive-spacing";
 
 const tabs = [
-  { id: "about", label: "About" },
+  { id: "about", label: "About Us" },
   { id: "bracelets", label: "Bracelets" },
   { id: "keychains", label: "Keychains" },
 ];
@@ -18,7 +18,9 @@ export function TabNavigation({ activeTab, onTabChange }: TabNavigationProps) {
   const { spacing } = useResponsiveSpacing();
 
   return (
-    <div className={`absolute left-1/2 -translate-x-1/2 ${spacing.tabNav} z-10 inline-flex bg-[#DFDDDE] rounded-full p-[3px]`}>
+    <div
+      className={`absolute left-1/2 -translate-x-1/2 ${spacing.tabNav} z-10 inline-flex bg-[#DFDDDE] rounded-full p-[3px]`}
+    >
       {tabs.map((tab) => (
         <button
           key={tab.id}

@@ -51,9 +51,12 @@ export function ExpandableLogo({ isHome }: ExpandableLogoProps) {
     hoverTimeoutRef.current = setTimeout(() => {
       setIsHovered(false);
       setHoveredItem(null);
-      // Show icon immediately, CSS will handle the delayed fade-in
-      setShowIcon(true);
     }, 200); // Slightly longer to feel more deliberate
+
+    // Delay showing the icon until after the closing animation completes
+    iconTimeoutRef.current = setTimeout(() => {
+      setShowIcon(true);
+    }, 500); // 200ms delay + 500ms transition duration
   };
 
   return (
@@ -118,13 +121,13 @@ export function ExpandableLogo({ isHome }: ExpandableLogoProps) {
       {showIcon && (
         <div
           className={cn(
-            "h-10 flex border border-gray-300 bg-gray-100 text-[#727272] px-2.5 rounded-full self-center items-center justify-center overflow-hidden",
+            "h-10 w-10 flex border border-gray-300 bg-gray-100 text-[#727272] rounded-full self-center items-center justify-center overflow-hidden",
             "transition-all duration-500 ease-in-out delay-200"
           )}
         >
           <svg
-            width="24"
-            height="24"
+            width="20"
+            height="20"
             viewBox="0 0 28.246 28.516"
             xmlns="http://www.w3.org/2000/svg"
           >
